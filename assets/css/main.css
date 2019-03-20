@@ -2,7 +2,8 @@
   font-family: 'iconfont';
   /* project id 682850 */
   src: url('//at.alicdn.com/t/font_682850_58yfbhz7jvf.eot');
-  src: url('//at.alicdn.com/t/font_682850_58yfbhz7jvf.eot?#iefix') format('embedded-opentype'),
+  src: url('//at.alicdn.com/t/font_682850_58yfbhz7jvf.eot?#iefix')
+      format('embedded-opentype'),
     url('//at.alicdn.com/t/font_682850_58yfbhz7jvf.woff') format('woff'),
     url('//at.alicdn.com/t/font_682850_58yfbhz7jvf.ttf') format('truetype'),
     url('//at.alicdn.com/t/font_682850_58yfbhz7jvf.svg#iconfont') format('svg');
@@ -11,35 +12,42 @@
 @font-face {
   font-family: 'meituan';
   src: url(//s0.meituan.net/bs/fe-web-meituan/c19c6e9/font/home-category-iconfont.eot?t=1503027869484);
-    src: url(//s0.meituan.net/bs/fe-web-meituan/c19c6e9/font/home-category-iconfont.eot?t=1503027869484#iefix) format('embedded-opentype'),
-    url(//s0.meituan.net/bs/fe-web-meituan/c19c6e9/font/home-category-iconfont.woff?t=1503027869484) format('woff'),
-    url(//s0.meituan.net/bs/fe-web-meituan/c19c6e9/font/home-category-iconfont.ttf?t=1503027869484) format('truetype'),
-    url(//s0.meituan.net/bs/fe-web-meituan/c19c6e9/font/home-category-iconfont.svg?t=1503027869484#home-category-iconfont) format('svg')
+  src: url(//s0.meituan.net/bs/fe-web-meituan/c19c6e9/font/home-category-iconfont.eot?t=1503027869484#iefix)
+      format('embedded-opentype'),
+    url(//s0.meituan.net/bs/fe-web-meituan/c19c6e9/font/home-category-iconfont.woff?t=1503027869484)
+      format('woff'),
+    url(//s0.meituan.net/bs/fe-web-meituan/c19c6e9/font/home-category-iconfont.ttf?t=1503027869484)
+      format('truetype'),
+    url(//s0.meituan.net/bs/fe-web-meituan/c19c6e9/font/home-category-iconfont.svg?t=1503027869484#home-category-iconfont)
+      format('svg');
 }
 
-.layout-blank{
+.layout-blank {
   background-color: #fff;
   color: #2e2f30;
   letter-spacing: 0.5px;
-  font-family: "Source Sans Pro", Arial, sans-serif;
+  font-family: 'Source Sans Pro', Arial, sans-serif;
   height: 100vh;
   margin: 0;
 }
-body{
+body {
   margin: 0;
   padding: 0;
 }
-body *{
+body * {
   margin: 0;
   padding: 0;
 }
 
-footer{
+footer {
   text-align: center;
 }
 
-a, a:hover, a:focus, a:visited{
-  color: #41B883;
+a,
+a:hover,
+a:focus,
+a:visited {
+  color: #41b883;
 }
 
 .logo {
@@ -47,9 +55,15 @@ a, a:hover, a:focus, a:visited{
   height: 218px;
 }
 
-.page-enter-active, .page-leave-active{
-  transition: opacity .5s
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.5s;
 }
-.page-enter, .page-leave-active{
-  opacity: 0
+.page-enter,
+.page-leave-active {
+  opacity: 0;
+}
+li,
+dd {
+  list-style: none;
 }
