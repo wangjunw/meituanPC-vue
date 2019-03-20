@@ -12,11 +12,13 @@
     "test": "jest"
   },
   "dependencies": {
+    "@nuxtjs/axios": "^5.3.6",
     "cross-env": "^5.2.0",
-    "nuxt": "^2.4.0",
-    "koa": "^2.6.2",
     "element-ui": "^2.4.11",
-    "@nuxtjs/axios": "^5.3.6"
+    "koa": "^2.6.2",
+    "node-sass": "^4.11.0",
+    "nuxt": "^2.4.0",
+    "sass-loader": "^7.1.0"
   },
   "devDependencies": {
     "nodemon": "^1.18.9",
