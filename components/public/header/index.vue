@@ -1,27 +1,16 @@
 <template>
-  <el-row :gutter="0">
-    <el-col :span="6">
-      <city/>
-    </el-col>
-    <el-col :span="6">
-      <user/>
-    </el-col>
-    <el-col :span="6">
-      <my-nav></my-nav>
-    </el-col>
-  </el-row>
+  <div>
+    <top-bar></top-bar>
+    <search-bar></search-bar>
+  </div>
 </template>
 <script>
-import City from "./city";
-import User from "./user";
-import MyNav from "./nav";
+import TopBar from "./topBar";
+import SearchBar from "./searchBar";
 export default {
   components: {
-    City,
-    User,
-    MyNav
+    TopBar,
+    SearchBar
   }
 };
 </script>
-<style lang="scss">
-</style>
