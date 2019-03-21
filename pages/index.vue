@@ -1,6 +1,6 @@
 <template>
   <section class="container">
-    <div>
+    <div style="height: 500px">
       <h1 class="title">meituanPC-vue</h1>
     </div>
   </section>

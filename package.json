@@ -1,7 +1,7 @@
 {
-  "name": "meituanPC-vue",
+  "name": "仿美团网",
   "version": "1.0.0",
-  "description": "My stupendous Nuxt.js project",
+  "description": "模仿美团网基于Nuxt.js的Vue项目",
   "author": "junwei",
   "private": true,
   "scripts": {
