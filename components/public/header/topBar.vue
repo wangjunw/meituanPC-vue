@@ -26,8 +26,15 @@ export default {
   display: flex;
   justify-content: space-between;
 }
+.top a {
+  color: #999;
+}
+.top a:hover {
+  color: #31bbac;
+}
 .top-left {
   display: flex;
+  padding-top: 12px;
 }
 .top-left .user {
   margin-left: 15px;

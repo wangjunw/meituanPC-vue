@@ -1,7 +1,7 @@
 <template>
   <div>
     <top-bar></top-bar>
-    <search-bar></search-bar>
+    <search-bar class="m-search"></search-bar>
   </div>
 </template>
 <script>
@@ -14,3 +14,9 @@ export default {
   }
 };
 </script>
+<style scoped>
+.m-search {
+  width: 100%;
+  background-color: #fff;
+}
+</style>
