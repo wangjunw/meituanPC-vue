@@ -1,22 +1,30 @@
 <template>
   <div>
     <el-row class="search">
-      <el-col :span="6">
+      <el-col :span="5">
         <img src="../../../static/images/logo.png" alt="美团" width="120">
       </el-col>
-      <el-col :span="18">
+      <el-col :span="19">
         <div class="center">
-          <div style="fontSize: 0; paddingLeft: 20px;">
-            <el-input v-model="input" placeholder="搜索商家或地点"></el-input>
+          <div style="fontSize: 0; paddingLeft: 20px;position: relative;">
+            <input
+              v-model="keyword"
+              placeholder="搜索商家或地点"
+              @focus="onFocus"
+              @blur="noFocus"
+              class="el-input"
+            >
             <el-button type="success" icon="el-icon-search"></el-button>
-            <div class="smartRecommendLayer">
-              <div v-if="showFocusContent">
-                <p>热门搜索</p>
-                <ul class="hot">
-                  <li v-for="item in recommendList" :key="item">{{item}}</li>
-                </ul>
-              </div>
-              <ul v-else class="match">
+            <div class="smartRecommendLayer" v-if="isHot">
+              <dl class="hot">
+                <dt>热门搜索</dt>
+                <dd v-for="item in recommendList" :key="item">{{item}}</dd>
+              </dl>
+            </div>
+            <div class="smartRecommendLayer" v-if="isMatch">
+              <ul class="match">
+                <li>列表</li>
+                <li>列表</li>
                 <li>列表</li>
               </ul>
             </div>
@@ -38,7 +46,7 @@
 export default {
   data() {
     return {
-      input: "",
+      keyword: "",
       recommendList: ["北京欢乐谷", "故宫博物院", "北京动物园"],
       tabLinks: [
         "美团外卖",
@@ -47,8 +55,25 @@ export default {
         "民宿 / 公寓",
         "商家入驻",
         "美团公益"
-      ]
+      ],
+      isFocus: false
     };
+  },
+  methods: {
+    onFocus() {
+      this.isFocus = true;
+    },
+    noFocus() {
+      this.isFocus = false;
+    }
+  },
+  computed: {
+    isHot() {
+      return this.isFocus && !this.keyword;
+    },
+    isMatch() {
+      return this.isFocus && this.keyword;
+    }
   }
 };
 </script>
@@ -57,10 +82,27 @@ export default {
 .search {
   width: 1190px;
   margin: 0 auto;
-  padding-top: 30px;
+  padding: 30px 0 15px;
 }
-.search .el-input {
-  width: 400px;
+.el-input {
+  width: 450px;
+  border: solid 1px #13d1be;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  line-height: 38px;
+  outline: 0;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+.el-input .el-input__inner {
+  border-radius: 0;
+}
+.el-button {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  background-color: #13d1be;
+  border-color: #13d1be;
+  width: 67px;
 }
 .recommend {
   padding-top: 8px;
@@ -78,15 +120,37 @@ export default {
   font-weight: 700;
   color: black;
 }
-.smartRecommendLayer .hot {
-  padding: 10px 5px;
+.smartRecommendLayer {
+  z-index: 2;
+  width: 450px;
+  background-color: #fff;
+  box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.1);
+  border-bottom-left-radius: 4px;
+  border-top-right-radius: 4px;
+  position: absolute;
+  font-size: 12px;
+  top: 100%;
+  left: 20px;
 }
-.smartRecommendLayer .hot li {
+.smartRecommendLayer .hot {
+  padding: 10px 10px 20px;
+}
+.smartRecommendLayer .hot dt {
+  margin-bottom: 10px;
+  color: #999;
+  font-weight: bold;
+}
+.smartRecommendLayer .hot dd {
+  color: #666;
   display: inline-block;
   margin-right: 15px;
 }
 .smartRecommendLayer .match li {
-  line-height: 2;
-  padding-left: 5px;
+  padding: 5px 10px;
+  color: #333;
+}
+.smartRecommendLayer .match li:hover {
+  color: #31bbac;
+  background-color: #f8f8f8;
 }
 </style>
