@@ -9,7 +9,17 @@
           <div style="fontSize: 0; paddingLeft: 20px;">
             <el-input v-model="input" placeholder="搜索商家或地点"></el-input>
             <el-button type="success" icon="el-icon-search"></el-button>
-            <div>下拉框</div>
+            <div class="smartRecommendLayer">
+              <div v-if="showFocusContent">
+                <p>热门搜索</p>
+                <ul class="hot">
+                  <li v-for="item in recommendList" :key="item">{{item}}</li>
+                </ul>
+              </div>
+              <ul v-else class="match">
+                <li>列表</li>
+              </ul>
+            </div>
           </div>
           <ul class="recommend">
             <li v-for="item in recommendList" :key="item">{{item}}</li>
@@ -67,5 +77,16 @@ export default {
   font-size: 16px;
   font-weight: 700;
   color: black;
+}
+.smartRecommendLayer .hot {
+  padding: 10px 5px;
+}
+.smartRecommendLayer .hot li {
+  display: inline-block;
+  margin-right: 15px;
+}
+.smartRecommendLayer .match li {
+  line-height: 2;
+  padding-left: 5px;
 }
 </style>
