@@ -1,6 +1,6 @@
 <template>
   <div class="m-user">
-    <template v-if="user">
+    <template v-if="user !== ''">
       <nuxt-link to="/my" class="user-link">{{user}}</nuxt-link>
       <nuxt-link to="/exit" class="user-link">[退出]</nuxt-link>
     </template>

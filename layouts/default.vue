@@ -21,4 +21,5 @@ export default {
 
 <style lang="scss">
 @import "@/assets/css/public/layout.scss";
+@import url("http://at.alicdn.com/t/font_1105047_1in0lzvwevs.css");
 </style>

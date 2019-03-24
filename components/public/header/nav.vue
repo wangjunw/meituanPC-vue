@@ -189,16 +189,18 @@ export default {
 };
 </script>
 
-<style scoped>
-.header-rightNav li {
-  float: left;
-  padding: 12px 14px;
-  position: relative;
-}
-.header-rightNav .hoverThis {
-  background-color: #fff;
-  border-color: #e5e5e5;
-  box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.1);
+<style lang="scss" scoped>
+.header-rightNav {
+  li {
+    float: left;
+    padding: 12px 14px;
+    position: relative;
+  }
+  .hoverThis {
+    background-color: #fff;
+    border-color: #e5e5e5;
+    box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.1);
+  }
 }
 .myMeituan,
 .merchantCenter,
@@ -213,42 +215,44 @@ export default {
   box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.1);
   z-index: 3;
 }
-.header-rightNav .myMeituan {
-  width: 100%;
-}
-.header-rightNav .merchantCenter {
-  width: 150%;
-}
-.header-rightNav .navigations {
-  width: 1190px;
-  padding: 30px 50px;
-  box-sizing: border-box;
-}
-.navigations dl {
-  text-align: center;
-  float: left;
-  margin-right: 47px;
-}
-.navigations dd {
-  float: left;
-}
-.navigations .hotel {
-  width: 234px;
-}
-.navigations .hotel dd {
-  width: 33%;
-}
-.navigations .food {
-  width: 156px;
-}
-.navigations .food dd {
-  width: 50%;
-}
-.navigations .movie {
-  width: 90px;
-}
-.navigations .movie dd {
-  width: 100%;
+.header-rightNav {
+  .myMeituan {
+    width: 100%;
+  }
+  .merchantCenter {
+    width: 150%;
+  }
+  .navigations {
+    width: 1190px;
+    padding: 30px 50px;
+    box-sizing: border-box;
+    dl {
+      text-align: center;
+      float: left;
+      margin-right: 47px;
+    }
+    dd {
+      float: left;
+    }
+    .hotel {
+      width: 234px;
+      dd {
+        width: 33%;
+      }
+    }
+    .food {
+      width: 156px;
+      dd {
+        width: 50%;
+      }
+    }
+    .movie {
+      width: 90px;
+      dd {
+        width: 100%;
+      }
+    }
+  }
 }
 </style>
 

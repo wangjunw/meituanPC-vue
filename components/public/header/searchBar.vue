@@ -10,8 +10,9 @@
             <input
               v-model="keyword"
               placeholder="搜索商家或地点"
-              @focus="onFocus"
-              @blur="noFocus"
+              @focus="focusHandler"
+              @blur="blurHandler"
+              @input="inputHandler"
               class="el-input"
             >
             <el-button type="success" icon="el-icon-search"></el-button>
@@ -34,7 +35,9 @@
           </ul>
           <div class="tabLink">
             <ul class="tabLinks">
-              <li v-for="item in tabLinks" :key="item">{{item}}</li>
+              <li v-for="item in tabLinks" :key="item">
+                <a href>{{item}}</a>
+              </li>
             </ul>
           </div>
         </div>
@@ -60,11 +63,14 @@ export default {
     };
   },
   methods: {
-    onFocus() {
+    focusHandler() {
       this.isFocus = true;
     },
-    noFocus() {
+    blurHandler() {
       this.isFocus = false;
+    },
+    inputHandler(e) {
+      console.log(e.target.value);
     }
   },
   computed: {
@@ -78,7 +84,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .search {
   width: 1190px;
   margin: 0 auto;
@@ -108,10 +114,10 @@ export default {
   padding-top: 8px;
   padding-left: 30px;
   margin-bottom: 30px;
-}
-.recommend li {
-  margin-right: 10px;
-  display: inline-block;
+  li {
+    margin-right: 10px;
+    display: inline-block;
+  }
 }
 .tabLinks li {
   display: inline-block;
@@ -131,26 +137,26 @@ export default {
   font-size: 12px;
   top: 100%;
   left: 20px;
-}
-.smartRecommendLayer .hot {
-  padding: 10px 10px 20px;
-}
-.smartRecommendLayer .hot dt {
-  margin-bottom: 10px;
-  color: #999;
-  font-weight: bold;
-}
-.smartRecommendLayer .hot dd {
-  color: #666;
-  display: inline-block;
-  margin-right: 15px;
-}
-.smartRecommendLayer .match li {
-  padding: 5px 10px;
-  color: #333;
-}
-.smartRecommendLayer .match li:hover {
-  color: #31bbac;
-  background-color: #f8f8f8;
+  .hot {
+    padding: 10px 10px 20px;
+    dt {
+      margin-bottom: 10px;
+      color: #999;
+      font-weight: bold;
+    }
+    dd {
+      color: #666;
+      display: inline-block;
+      margin-right: 15px;
+    }
+  }
+  .match li {
+    padding: 5px 10px;
+    color: #333;
+    &:hover {
+      color: #31bbac;
+      background-color: #f8f8f8;
+    }
+  }
 }
 </style>
