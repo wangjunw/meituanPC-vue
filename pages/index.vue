@@ -9,12 +9,14 @@
       </el-col>
     </el-row>
     <el-row>
-      <el-col :span="24">1</el-col>
+      <el-col :span="24">
+        <mt-style></mt-style>
+      </el-col>
       <el-col :span="24">2</el-col>
       <el-col :span="24">3</el-col>
       <el-col :span="24">4</el-col>
       <el-col :span="24">
-        <mt-navigation></mt-navigation>
+        <!-- <mt-navigation></mt-navigation> -->
       </el-col>
     </el-row>
   </div>
@@ -23,12 +25,13 @@
 <script>
 import MenuList from "@/components/home/menu.vue";
 import Banner from "@/components/home/banner.vue";
+import mtStyle from "@/components/home/style.vue";
 import mtNavigation from "@/components/home/mtNavigation.vue";
 export default {
   data() {
     return {};
   },
-  components: { MenuList, Banner, mtNavigation },
+  components: { MenuList, Banner, mtStyle, mtNavigation },
   methods: {},
   computed: {}
 };

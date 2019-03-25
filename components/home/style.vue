@@ -1,6 +1,6 @@
 <template>
   <div>
-    <title-bar title="有格调" :tabs="tabs"></title-bar>
+    <title-bar title="有格调" :tabs="tabs" style="background: rgb(190, 164, 116)"></title-bar>
     <ul>
       <li></li>
     </ul>
