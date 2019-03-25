@@ -1,32 +1,36 @@
 <template>
-  <div>
+  <div class="m-banner">
     <el-row style="height: 240px;">
-      <el-col :span="15">
-        <el-carousel>
+      <el-col :span="14">
+        <el-carousel style="width: 550px">
           <el-carousel-item v-for="item in swiperData" :key="item">
-            <img :src="item.url" width="100%" height="100%">
+            <a href>
+              <img :src="item.url" width="100%" height="240px">
+            </a>
           </el-carousel-item>
         </el-carousel>
       </el-col>
       <el-col :span="4">
-        <img
-          src="http://p0.meituan.net/codeman/e473bb428f070321269b23370ff02ba956209.jpg"
-          alt
-          width="100%"
-          height="100%"
-        >
+        <a href class="t1"></a>
       </el-col>
-      <el-col :span="5">右侧</el-col>
+      <el-col :span="6">
+        <div class="loginAndRegister">
+          <p>Hi，你好</p>
+        </div>
+      </el-col>
     </el-row>
-    <el-row>
-      <el-col :span="8">
-        <div class="grid-content bg-purple"></div>
+    <el-row style="marginTop: 10px;">
+      <el-col :span="14">
+        <div class>
+          <a href class="f f1"></a>
+          <a href class="f f2"></a>
+        </div>
       </el-col>
-      <el-col :span="8">
-        <div class="grid-content bg-purple-light"></div>
+      <el-col :span="4">
+        <a href class="f3"></a>
       </el-col>
-      <el-col :span="8">
-        <div class="grid-content bg-purple"></div>
+      <el-col :span="6">
+        <div class="qrcode">二维码</div>
       </el-col>
     </el-row>
   </div>
@@ -53,3 +57,6 @@ export default {
   }
 };
 </script>
+<style lang="scss">
+@import "@/assets/css/home/banner.scss";
+</style>

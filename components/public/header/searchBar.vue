@@ -127,7 +127,7 @@ export default {
   color: black;
 }
 .smartRecommendLayer {
-  z-index: 2;
+  z-index: 12;
   width: 450px;
   background-color: #fff;
   box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.1);

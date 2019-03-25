@@ -157,7 +157,7 @@
             <dt>手机应用</dt>
             <dd>
               <a href="https://i.meituan.com/mobile/down/meituan">
-                <img src='' alt>
+                <img src alt>
               </a>
             </dd>
           </dl>
@@ -213,7 +213,7 @@ export default {
   text-align: center;
   border-color: #e5e5e5;
   box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.1);
-  z-index: 3;
+  z-index: 13;
 }
 .header-rightNav {
   .myMeituan {

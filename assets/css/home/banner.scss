@@ -1,0 +1,47 @@
+.el-carousel__container {
+  height: 240px;
+}
+.m-banner {
+  padding-top: 10px;
+  margin-left: -8px;
+  .t1 {
+    width: 150px;
+    height: 240px;
+    margin-left: 7px;
+    background-image: url(http://p0.meituan.net/codeman/e473bb428f070321269b23370ff02ba956209.jpg);
+  }
+  .loginAndRegister {
+    width: 228px;
+    background-color: #fff;
+    height: 240px;
+    margin-left: 10px;
+    text-align: center;
+  }
+  a {
+    display: inline-block;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+  .f {
+    width: 270px;
+    height: 165px;
+  }
+  .f1 {
+    background-image: url(http://p1.meituan.net/codeman/8cce56c467a17e04f3094d1e455462a0132772.png);
+    margin-right: 7px;
+  }
+  .f2 {
+    background-image: url(http://p1.meituan.net/codeman/16442c19da1f1c4544f794e29d99c92051716.jpg);
+  }
+  .f3 {
+    width: 150px;
+    height: 165px;
+    margin-left: 7px;
+    background-image: url(http://p1.meituan.net/codeman/5b21cddb4bb1cbc3a9c3bce0f726c75940469.jpg);
+  }
+  .qrcode {
+    background-color: #fff;
+    height: 165px;
+    margin-left: 10px;
+  }
+}

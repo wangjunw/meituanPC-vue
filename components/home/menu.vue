@@ -11,7 +11,12 @@
         </li>
       </ul>
     </div>
-    <div class="detail" v-if="currentType !== ''">
+    <div
+      class="detail"
+      v-if="currentType !== ''"
+      @mouseenter="detailEnterHandler"
+      @mouseleave="detailLeaveHandler"
+    >
       <template v-for="(item,index) in currentDetail.detail">
         <h4 :key="index" class="detailTitle">
           <span>{{item.title}}</span>
@@ -73,12 +78,18 @@ export default {
   },
   methods: {
     mouseleaveHandler() {
-      setTimeout(() => {
+      this.timer = setTimeout(() => {
         this.currentType = "";
       }, 200);
     },
     mouseenterHandler(e) {
       this.currentType = e;
+    },
+    detailEnterHandler() {
+      clearTimeout(this.timer);
+    },
+    detailLeaveHandler() {
+      this.currentType = "";
     }
   },
   computed: {
@@ -89,5 +100,5 @@ export default {
 };
 </script>
 <style lang="scss" scope>
-@import "@/assets/css/public/menu.scss";
+@import "@/assets/css/home/menu.scss";
 </style>
