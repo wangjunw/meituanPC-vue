@@ -16,11 +16,23 @@
       <el-col :span="6">
         <div class="loginAndRegister">
           <img :src="avatar" class="avatar">
-          <p class="hi">Hi，你好</p>
-          <div class="registerBtn">
-            <el-button round>注册</el-button>
+          <p class="hi">{{name===''?'Hi，你好':name}}</p>
+          <div v-if="name === ''">
+            <div class="registerBtn">
+              <el-button round>注册</el-button>
+            </div>
+            <el-button round>立即登录</el-button>
           </div>
-          <el-button round>立即登录</el-button>
+          <div v-else class="userCenter">
+            <ul>
+              <li v-for="item in userCenter" :key="item.text">
+                <a href>
+                  <i class="iconfont" :class="item.icon"></i>
+                  <p class="text">{{item.text}}</p>
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
       </el-col>
     </el-row>
@@ -55,6 +67,29 @@ export default {
   data() {
     return {
       avatar: require("@/static/images/avatar.jpg"),
+      name: "均",
+      userCenter: [
+        {
+          icon: "icondingdan2",
+          text: "我的订单"
+        },
+        {
+          icon: "iconxingxing",
+          text: "我的收藏"
+        },
+        {
+          icon: "iconqian3",
+          text: "抵用券"
+        },
+        {
+          icon: "iconyuebao",
+          text: "余额"
+        },
+        {
+          icon: "icongengduo",
+          text: "更多"
+        }
+      ],
       swiperData: [
         {
           index: 1,

@@ -32,6 +32,22 @@
       width: 118px;
     }
   }
+  .userCenter {
+    overflow: hidden;
+    padding: 10px 5px 0;
+    li {
+      float: left;
+      width: 33%;
+      i {
+        color: #96e4da;
+        font-size: 16px;
+      }
+      .text {
+        color: #222;
+        margin: 5px 0;
+      }
+    }
+  }
   a {
     display: inline-block;
     background-size: contain;
