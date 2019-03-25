@@ -157,7 +157,7 @@
             <dt>手机应用</dt>
             <dd>
               <a href="https://i.meituan.com/mobile/down/meituan">
-                <img src alt>
+                <img src='' alt>
               </a>
             </dd>
           </dl>

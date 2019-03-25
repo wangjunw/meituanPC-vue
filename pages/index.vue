@@ -4,7 +4,9 @@
       <el-col :span="5" style="position: relative; height: 100%;">
         <menu-list/>
       </el-col>
-      <el-col :span="19">图片</el-col>
+      <el-col :span="19">
+        <banner></banner>
+      </el-col>
     </el-row>
     <el-row>
       <el-col :span="24">内容</el-col>
@@ -14,11 +16,12 @@
 
 <script>
 import MenuList from "@/components/home/menu.vue";
+import Banner from "@/components/home/banner.vue";
 export default {
   data() {
     return {};
   },
-  components: { MenuList },
+  components: { MenuList, Banner },
   methods: {},
   computed: {}
 };
