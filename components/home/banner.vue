@@ -15,7 +15,12 @@
       </el-col>
       <el-col :span="6">
         <div class="loginAndRegister">
-          <p>Hi，你好</p>
+          <img :src="avatar" class="avatar">
+          <p class="hi">Hi，你好</p>
+          <div class="registerBtn">
+            <el-button round>注册</el-button>
+          </div>
+          <el-button round>立即登录</el-button>
         </div>
       </el-col>
     </el-row>
@@ -30,7 +35,17 @@
         <a href class="f3"></a>
       </el-col>
       <el-col :span="6">
-        <div class="qrcode">二维码</div>
+        <div class="qrcode">
+          <img
+            src="http://s1.meituan.net/bs/fe-web-meituan/60ac9a0/img/download-qr.png"
+            alt
+            width="95px"
+          >
+          <p class="title">美团APP手机版</p>
+          <p>
+            <span class="oneYuan">1元起</span>吃喝玩乐
+          </p>
+        </div>
       </el-col>
     </el-row>
   </div>
@@ -39,6 +54,7 @@
 export default {
   data() {
     return {
+      avatar: require("@/static/images/avatar.jpg"),
       swiperData: [
         {
           url:

@@ -13,6 +13,10 @@ body {
 body * {
   margin: 0;
   padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: '-apple-system', BlinkMacSystemFont, Roboto, 'Helvetica Neue',
+    'MIcrosoft YaHei', sans-serif !important;
 }
 
 a:hover,
