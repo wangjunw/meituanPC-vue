@@ -3,7 +3,7 @@
     <el-row style="height: 240px;">
       <el-col :span="14">
         <el-carousel style="width: 550px">
-          <el-carousel-item v-for="item in swiperData" :key="item">
+          <el-carousel-item v-for="item in swiperData" :key="item.index">
             <a href>
               <img :src="item.url" width="100%" height="240px">
             </a>
@@ -57,14 +57,17 @@ export default {
       avatar: require("@/static/images/avatar.jpg"),
       swiperData: [
         {
+          index: 1,
           url:
             "http://p0.meituan.net/codeman/33ff80dc00f832d697f3e20fc030799560495.jpg"
         },
         {
+          index: 2,
           url:
             "https://p1.meituan.net/travelcube/01d2ab1efac6e2b7adcfcdf57b8cb5481085686.png"
         },
         {
+          index: 3,
           url:
             "http://p0.meituan.net/codeman/a97baf515235f4c5a2b1323a741e577185048.jpg"
         }

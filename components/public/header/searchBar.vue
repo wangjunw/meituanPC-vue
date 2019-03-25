@@ -13,9 +13,10 @@
               @focus="focusHandler"
               @blur="blurHandler"
               @input="inputHandler"
+              @keydown="searchHandler"
               class="el-input"
             >
-            <el-button type="success" icon="el-icon-search"></el-button>
+            <el-button type="success" icon="el-icon-search" @click="searchHandler"></el-button>
             <div class="smartRecommendLayer" v-if="isHot">
               <dl class="hot">
                 <dt>热门搜索</dt>
@@ -70,7 +71,12 @@ export default {
       this.isFocus = false;
     },
     inputHandler(e) {
-      console.log(e.target.value);
+      // console.log(e.target.value);
+    },
+    searchHandler(e) {
+      if ((e.type === "keydown" && e.keyCode === "13") || e.type === "click") {
+        console.log("提交");
+      }
     }
   },
   computed: {
@@ -109,6 +115,9 @@ export default {
   background-color: #13d1be;
   border-color: #13d1be;
   width: 67px;
+  &:active {
+    opacity: 0.6;
+  }
 }
 .recommend {
   padding-top: 8px;

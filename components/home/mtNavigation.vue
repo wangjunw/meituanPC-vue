@@ -1,6 +1,8 @@
 <template>
-  <div class="title">
-    <h2>美团导航</h2>
+  <div>
+    <div class="titleBar">
+      <ul></ul>
+    </div>
     <ul>
       <li></li>
     </ul>
