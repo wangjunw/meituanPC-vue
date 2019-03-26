@@ -1,8 +1,14 @@
 <template>
-  <div>注册</div>
+  <div>
+    <top-bar/>
+  </div>
 </template>
 <script>
+import topBar from "@/components/register/topBar.vue";
 export default {
-  layout: "registerTem"
+  layout: "registerTemplate",
+  components: {
+    topBar
+  }
 };
 </script>
