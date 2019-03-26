@@ -32,6 +32,9 @@
                 </a>
               </li>
             </ul>
+            <nuxt-link to="/setting" class="setting">
+              <i class="iconfont iconshezhi"></i>
+            </nuxt-link>
           </div>
         </div>
       </el-col>
