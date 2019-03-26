@@ -22,7 +22,7 @@
         <guess-link/>
       </el-col>
       <el-col :span="24">
-        <mt-navigation></mt-navigation>
+        <mt-navigation/>>
       </el-col>
     </el-row>
   </div>

@@ -34,9 +34,6 @@ export default {
       required: true
     }
   },
-  mounted() {
-    // console.log(this.props.moreLink);
-  },
   methods: {
     mouseEnterHandler(index) {
       this.currentTab = index;
