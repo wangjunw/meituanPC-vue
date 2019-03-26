@@ -1,6 +1,6 @@
 <template>
   <div>
-    <title-bar title="有格调" :tabs="tabs"></title-bar>
+    <title-bar title="美团导航" bgcolor="#0ECAC7"></title-bar>
     <ul>
       <li></li>
     </ul>

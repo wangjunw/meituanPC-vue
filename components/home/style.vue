@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <title-bar title="有格调" :tabs="tabs" bgColor="rgb(190, 164, 116)"></title-bar>
+  <div class="m-style">
+    <title-bar title="有格调" :tabs="tabs" bgcolor="rgb(190, 164, 116)"></title-bar>
     <ul>
       <li></li>
     </ul>
@@ -41,3 +41,8 @@ export default {
   }
 };
 </script>
+<style lang="scss" scoped>
+.m-style {
+  margin: 40px 0;
+}
+</style>
