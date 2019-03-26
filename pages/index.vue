@@ -10,7 +10,7 @@
     </el-row>
     <el-row>
       <el-col :span="24">
-        <mt-style></mt-style>
+        <mt-style/>>
       </el-col>
       <el-col :span="24">2</el-col>
       <el-col :span="24">3</el-col>
@@ -38,8 +38,4 @@ export default {
 </script>
 
 <style lang="scss">
-.titleBar {
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-}
 </style>
