@@ -1,0 +1,55 @@
+.m-login {
+  font-size: 12px;
+  width: 980px;
+  color: #999;
+  margin: 0 auto;
+  //   logo
+  header {
+    padding: 40px 0 30px;
+  }
+  //   中间位置
+  main {
+    padding-bottom: 70px;
+    display: flex;
+    .leftImg {
+      margin-right: 115px;
+    }
+  }
+  //   底部导航
+  nav {
+    border-top: solid 1px #eee;
+    .nav {
+      display: inline-block;
+      padding: 20px 0;
+      a {
+        padding: 0 10px;
+        border-right: solid 1px #999;
+        color: #999;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+      &:last-of-type {
+        a {
+          border-right: none;
+        }
+      }
+      &:first-of-type {
+        a {
+          padding-left: 0;
+        }
+      }
+    }
+  }
+  //   底部
+  footer {
+    border-top: solid 1px #eee;
+    padding-top: 20px;
+    a {
+      color: #999;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
