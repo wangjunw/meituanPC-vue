@@ -157,7 +157,27 @@
             <dt>手机应用</dt>
             <dd>
               <a href="https://i.meituan.com/mobile/down/meituan">
-                <img src alt>
+                <img :src="meituanImg" alt>
+              </a>
+            </dd>
+            <dd>
+              <a href="https://waimai.meituan.com/mobile/download/default">
+                <img :src="waimaiImg" alt>
+              </a>
+            </dd>
+            <dd>
+              <a href="https://phoenix.meituan.com/app/">
+                <img :src="zhenguoImg" alt>
+              </a>
+            </dd>
+            <dd>
+              <a href="https://www.dianping.com/events/m/index.htm">
+                <img :src="dianpingImg" alt>
+              </a>
+            </dd>
+            <dd>
+              <a href="https://maoyan.com/app">
+                <img :src="maoyanImg" alt>
               </a>
             </dd>
           </dl>
@@ -172,7 +192,12 @@ export default {
     return {
       hoverMyMeituan: false,
       hoverMerchantCenter: false,
-      hoverNavigation: false
+      hoverNavigation: false,
+      meituanImg: require("@/static/images/meituan.png"),
+      waimaiImg: require("@/static/images/waimai.png"),
+      zhenguoImg: require("@/static/images/zhenguo.png"),
+      dianpingImg: require("@/static/images/dianping.png"),
+      maoyanImg: require("@/static/images/maoyan.png")
     };
   },
   methods: {
@@ -230,6 +255,9 @@ export default {
       text-align: center;
       float: left;
       margin-right: 47px;
+      dt {
+        margin-bottom: 20px;
+      }
     }
     dd {
       float: left;
@@ -250,6 +278,13 @@ export default {
       width: 90px;
       dd {
         width: 100%;
+      }
+    }
+    .app {
+      img {
+        width: 60px;
+        height: 60px;
+        margin-right: 20px;
       }
     }
   }
