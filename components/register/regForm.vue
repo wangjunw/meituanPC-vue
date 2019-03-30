@@ -1,6 +1,14 @@
 <template>
   <div class="regForm">
-    <el-form :model="params" status-icon :rules="rules" label-width="100px" class inline-message>
+    <el-form
+      :model="params"
+      status-icon
+      :rules="rules"
+      ref="registerForm"
+      label-width="100px"
+      class
+      inline-message
+    >
       <el-form-item label="手机号" prop="mobil">
         <el-input v-model.number="params.mobil"></el-input>
       </el-form-item>
@@ -15,7 +23,7 @@
         <el-input v-model.number="params.confirmPass" type="password" autocomplete="off"></el-input>
       </el-form-item>
       <el-form-item>
-        <button class="agreeReg">同意以下协议并注册</button>
+        <el-button @click="registerHandler" class="agreeReg">同意以下协议并注册</el-button>
       </el-form-item>
     </el-form>
     <nuxt-link to="/terms" class="terms">《美团网用户协议》</nuxt-link>
@@ -75,6 +83,17 @@ export default {
         confirmPass: [{ validator: validatePass2, trigger: "blur" }]
       }
     };
+  },
+  methods: {
+    registerHandler() {
+      this.$refs["registerForm"].validate(valid => {
+        if (valid) {
+          console.log("注册");
+        } else {
+          return false;
+        }
+      });
+    }
   }
 };
 </script>

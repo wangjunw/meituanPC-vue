@@ -71,6 +71,7 @@ export default {
     return {
       avatar: require("@/static/images/avatar.jpg"),
       name: "均",
+
       userCenter: [
         {
           icon: "icondingdan2",

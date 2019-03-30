@@ -5,6 +5,13 @@
         <menu-list/>
       </el-col>
       <el-col :span="19">
+        <div class="tabLink">
+          <ul class="tabLinks">
+            <li v-for="item in tabLinks" :key="item">
+              <a href>{{item}}</a>
+            </li>
+          </ul>
+        </div>
         <banner/>
       </el-col>
     </el-row>
@@ -38,7 +45,16 @@ import guessLink from "@/components/home/guessLike.vue";
 import mtNavigation from "@/components/home/mtNavigation.vue";
 export default {
   data() {
-    return {};
+    return {
+      tabLinks: [
+        "美团外卖",
+        "猫眼电影",
+        "美团酒店",
+        "民宿 / 公寓",
+        "商家入驻",
+        "美团公益"
+      ]
+    };
   },
   components: {
     MenuList,
@@ -55,4 +71,15 @@ export default {
 </script>
 
 <style lang="scss">
+.tabLink {
+  position: absolute;
+  top: -35px;
+}
+.tabLinks li {
+  display: inline-block;
+  margin: 0 20px;
+  font-size: 16px;
+  font-weight: 700;
+  color: black;
+}
 </style>

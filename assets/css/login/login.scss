@@ -13,42 +13,170 @@
     display: flex;
     .leftImg {
       margin-right: 115px;
+      width: 480px;
+      height: 370px;
     }
-  }
-  //   底部导航
-  nav {
-    border-top: solid 1px #eee;
-    .nav {
-      display: inline-block;
-      padding: 20px 0;
-      a {
-        padding: 0 10px;
-        border-right: solid 1px #999;
+    .loginForm {
+      padding-top: 40px;
+      width: 270px;
+      color: #666;
+      .warning {
+        background: #fff6db;
+        border: solid 1px #f5d8a7;
+        border-radius: 2px;
+        padding: 10px;
+        margin-bottom: 10px;
+        .iconfont {
+          color: #f76120;
+          font-size: 17px;
+          position: relative;
+          top: 1px;
+        }
+      }
+      .loginType {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 14px;
+        margin-bottom: 10px;
+        .changeLoginType {
+          font-size: 12px;
+          span {
+            &:hover {
+              text-decoration: underline;
+              cursor: pointer;
+            }
+          }
+          i {
+            width: 14px;
+            height: 14px;
+            display: inline-block;
+            background-repeat: no-repeat;
+            position: relative;
+            top: 2px;
+            &.mobilIcon {
+              background-position: -877px -677px;
+            }
+            &.personIcon {
+              background-position: -891px -677px;
+            }
+          }
+        }
+      }
+      .inputArea {
+        position: relative;
+        ._input {
+          border: solid 1px #999;
+          width: 230px;
+          padding: 5px 5px 5px 33px;
+          height: 24px;
+          margin-bottom: 15px;
+        }
+        i {
+          position: absolute;
+          width: 18px;
+          height: 18px;
+          background-repeat: no-repeat;
+          left: 10px;
+          &.accountIcon {
+            background-position: -1250px -617px;
+            top: 8px;
+          }
+          &.mobilIcon {
+            background-position: -1250px -581px;
+            top: 8px;
+          }
+          &.passIcon {
+            background-position: -1250px -527px;
+            top: 59px;
+          }
+        }
+      }
+      .verificationCode {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+        .codeInput {
+          width: 62px;
+          height: 24px;
+          padding: 5px;
+          border: solid 1px #f76120;
+          margin-right: 5px;
+        }
+        .codeImg {
+          border: 1px solid #ccc;
+          cursor: pointer;
+          margin-right: 10px;
+        }
+        span {
+          cursor: pointer;
+          color: #2bb8aa;
+        }
+      }
+      .forgetPass {
+        text-align: right;
+        margin-bottom: 15px;
+        a {
+          color: #2bb8aa;
+        }
+      }
+
+      .loginBtn {
+        width: 100%;
+        background: linear-gradient(to bottom, #2bb8aa, #2eb7aa);
+        background: #2db3a6;
+        padding: 10px 0;
+        border: none;
+        border-bottom: solid 1px #008177;
+        border-radius: 2px;
+        color: #fff;
+        font-weight: 700;
+      }
+      .toRegister {
+        font-size: 14px;
+        margin-top: 10px;
+      }
+      .tips {
         color: #999;
-        &:hover {
-          text-decoration: underline;
-        }
-      }
-      &:last-of-type {
+        margin: 18px 0 10px;
         a {
-          border-right: none;
+          color: #2bb8aa;
+          &:hover {
+            text-decoration: underline;
+          }
         }
       }
-      &:first-of-type {
+      .line {
+        border-bottom: solid 1px #ccc;
+        position: relative;
+        height: 20px;
+        margin-bottom: 30px;
+        span {
+          position: absolute;
+          background: #fff;
+          padding: 0 10px;
+          bottom: -9px;
+          font-size: 14px;
+          left: 50%;
+          transform: translateX(-50%);
+          white-space: nowrap;
+        }
+      }
+      .cooperation {
+        text-align: center;
         a {
-          padding-left: 0;
+          width: 18px;
+          height: 18px;
+          background-repeat: no-repeat;
+          display: inline-block;
+          &.qq {
+            background-position: -1250px -491px;
+            margin-right: 15px;
+          }
+          &.weibo {
+            background-position: -1250px -599px;
+          }
         }
-      }
-    }
-  }
-  //   底部
-  footer {
-    border-top: solid 1px #eee;
-    padding-top: 20px;
-    a {
-      color: #999;
-      &:hover {
-        text-decoration: underline;
       }
     }
   }

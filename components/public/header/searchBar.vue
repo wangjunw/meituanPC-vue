@@ -34,13 +34,6 @@
           <ul class="recommend">
             <li v-for="item in recommendList" :key="item">{{item}}</li>
           </ul>
-          <div class="tabLink">
-            <ul class="tabLinks">
-              <li v-for="item in tabLinks" :key="item">
-                <a href>{{item}}</a>
-              </li>
-            </ul>
-          </div>
         </div>
       </el-col>
     </el-row>
@@ -52,14 +45,6 @@ export default {
     return {
       keyword: "",
       recommendList: ["北京欢乐谷", "故宫博物院", "北京动物园"],
-      tabLinks: [
-        "美团外卖",
-        "猫眼电影",
-        "美团酒店",
-        "民宿 / 公寓",
-        "商家入驻",
-        "美团公益"
-      ],
       isFocus: false
     };
   },
@@ -128,13 +113,7 @@ export default {
     display: inline-block;
   }
 }
-.tabLinks li {
-  display: inline-block;
-  margin: 0 20px;
-  font-size: 16px;
-  font-weight: 700;
-  color: black;
-}
+
 .smartRecommendLayer {
   z-index: 12;
   width: 450px;
