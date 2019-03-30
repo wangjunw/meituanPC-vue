@@ -24,7 +24,7 @@
           </p>
         </div>
         <div class="inputArea">
-          <div v-if="loginType === 'passLogin'" class="inputArea">
+          <div v-if="loginType === 'passLogin'">
             <i class="accountIcon" :style="loginIconStyle"></i>
             <input
               type="text"
@@ -39,6 +39,16 @@
               placeholder="密码"
               v-model="formParams.password"
             >
+            <div class="verificationCode" v-if="showVerificationCode">
+              <input
+                type="text"
+                placeholder="验证码"
+                class="codeInput"
+                v-model="formParams.verificationCode"
+              >
+              <img :src="codeImg" @click="updateCodeImg" width="72px" height="36px" class="codeImg">
+              <span @click="updateCodeImg">看不清楚？换一张</span>
+            </div>
           </div>
           <div v-else>
             <i class="mobilIcon" :style="loginIconStyle"></i>
@@ -50,18 +60,11 @@
             >
             <i class="passIcon" :style="loginIconStyle"></i>
             <input type="text" class="_input passInput" placeholder="动态码" v-model="formParams.code">
+            <a href="javascript:;" class="getCode" @click="getCode">{{getCodeText}}</a>
+            <p class="codeTips" v-if="showCodeTips">请先获取验证码</p>
           </div>
         </div>
-        <div class="verificationCode" v-if="showVerificationCode">
-          <input
-            type="text"
-            placeholder="验证码"
-            class="codeInput"
-            v-model="formParams.verificationCode"
-          >
-          <img :src="codeImg" @click="updateCodeImg" width="72px" height="36px" class="codeImg">
-          <span @click="updateCodeImg">看不清楚？换一张</span>
-        </div>
+
         <p class="forgetPass">
           <nuxt-link to="/findPassword">忘记密码？</nuxt-link>
         </p>
@@ -108,7 +111,9 @@ export default {
       },
       message: "",
       codeImg: "",
+      getCodeText: "获取手机动态码",
       showVerificationCode: true,
+      showCodeTips: false,
       loginType: "passLogin",
       leftImg: require("@/static/images/login_left.jpg"),
       logoStyle: {
@@ -130,7 +135,8 @@ export default {
         this.loginType === "passLogin" ? "codeLogin" : "passLogin";
     },
     loginHandler() {},
-    updateCodeImg() {}
+    updateCodeImg() {},
+    getCode() {}
   }
 };
 </script>

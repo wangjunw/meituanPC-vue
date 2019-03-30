@@ -9,7 +9,6 @@
   }
   //   中间位置
   main {
-    padding-bottom: 70px;
     display: flex;
     .leftImg {
       margin-right: 115px;
@@ -17,8 +16,9 @@
       height: 370px;
     }
     .loginForm {
-      padding-top: 40px;
+      padding: 40px 0 70px;
       width: 270px;
+      box-sizing: border-box;
       color: #666;
       .warning {
         background: #fff6db;
@@ -64,13 +64,19 @@
         }
       }
       .inputArea {
+        margin-bottom: 15px;
         position: relative;
         ._input {
           border: solid 1px #999;
           width: 230px;
           padding: 5px 5px 5px 33px;
           height: 24px;
-          margin-bottom: 15px;
+        }
+        .passInput {
+          margin-top: 15px;
+        }
+        .codeTips {
+          margin-top: 5px;
         }
         i {
           position: absolute;
@@ -91,11 +97,18 @@
             top: 59px;
           }
         }
+        .getCode {
+          position: absolute;
+          right: 5px;
+          top: 60px;
+          color: #666;
+        }
       }
       .verificationCode {
         display: flex;
         align-items: center;
         margin-bottom: 10px;
+        margin-top: 15px;
         .codeInput {
           width: 62px;
           height: 24px;
