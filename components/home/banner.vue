@@ -32,7 +32,7 @@
                 </a>
               </li>
             </ul>
-            <nuxt-link to="/setting" class="setting">
+            <nuxt-link to="/settings" class="setting">
               <i class="iconfont iconshezhi"></i>
             </nuxt-link>
           </div>
