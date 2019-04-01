@@ -15,7 +15,7 @@
       <el-form-item label="邮箱" prop="email">
         <el-input v-model="params.email" ref="emailForm"></el-input>
       </el-form-item>
-      <button class="getCode" @click="getCode">免费获取邮箱动态码</button>
+      <el-button class="getCode" @click="getCode">{{getCode_btnText}}</el-button>
       <el-form-item label="动态码" prop="verificationCode">
         <el-input v-model.number="params.verificationCode"></el-input>
       </el-form-item>
@@ -95,7 +95,9 @@ export default {
         verificationCode: [{ validator: validateCode, trigger: "blur" }],
         pass: [{ validator: validatePass, trigger: "blur" }],
         confirmPass: [{ validator: validatePass2, trigger: "blur" }]
-      }
+      },
+      getCode_btnText: "免费获取邮箱验证码",
+      canClick: true
     };
   },
   methods: {
@@ -109,11 +111,36 @@ export default {
       });
     },
     getCode() {
-      this.$refs["registerForm"].validateField(["email"], valid => {
-        if (valid) {
+      this.$refs["registerForm"].validateField("email", valid => {
+        // 如果校验不通过则vaild有值，也就是上面匹配的对应的Error信息
+        if (valid || !this.canClick) {
           return false;
         } else {
-          console.log("哈哈");
+          // 验证通过
+          this.$axios
+            .post("/users/verify", { email: this.params.email })
+            .then(res => {
+              let data = res.data;
+              if (res.status === 200 && data.code === 0) {
+                this.$message({
+                  message: "获取验证码成功，请前往邮箱查看",
+                  type: "success"
+                });
+                this.canClick = false;
+                let expire = data.expire;
+                let timer = setInterval(() => {
+                  expire -= 1;
+                  this.getCode_btnText = `${expire}s后再次获取`;
+                  if (expire === 0) {
+                    clearInterval(timer);
+                    this.getCode_btnText = "免费获取邮箱验证码";
+                    this.canClick = true;
+                  }
+                }, 1000);
+              } else {
+                this.$message.error("获取验证码失败");
+              }
+            });
         }
       });
     }
@@ -129,17 +156,21 @@ export default {
     width: 248px;
   }
   .getCode {
-    padding: 0 8px;
+    padding: 3px 8px;
     margin-left: 100px;
     position: relative;
     top: -10px;
     color: #333;
+    background: #dedede;
+    border: solid 1px #e3e3e3;
+    font-size: 12px;
+    border-radius: 2px;
   }
   .agreeReg {
     background-color: #2db3a6;
     border: none;
     color: #fff;
-    padding: 8px 20px;
+    padding: 10px 20px;
     font-weight: 700;
     border-bottom: solid 1px #008177;
     border-radius: 2px;

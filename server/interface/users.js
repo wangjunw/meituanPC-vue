@@ -82,7 +82,7 @@ router.post('/signup', async ctx => {
 });
 
 // 登录接口
-router.post('signin', async (ctx, next) => {
+router.post('/signin', async (ctx, next) => {
   return Passport.authenticate('local', (err, user, info, status) => {
     if (err) {
       ctx.body = {
@@ -108,9 +108,9 @@ router.post('signin', async (ctx, next) => {
 });
 
 // 获取验证码接口
-router.post('verify', async (ctx, next) => {
-  let username = ctx.request.body.username;
-  const saveExpire = await Store.hget(`nodemail:${username}`, 'expire');
+router.post('/verify', async (ctx, next) => {
+  let email = ctx.request.body.email;
+  const saveExpire = await Store.hget(`nodemail:${email}`, 'expire');
   if (saveExpire && new Date().getTime() - saveExpire < 0) {
     ctx.body = {
       code: -1,
@@ -128,39 +128,35 @@ router.post('verify', async (ctx, next) => {
       pass: Email.smtp.pass
     }
   });
-  // 要发送的邮件的信息
-  let ko = {
-    code: Email.smtp.code(),
-    expire: Email.smtp.expire(),
-    email: ctx.request.body.email,
-    user: ctx.request.body.username
-  };
   // 邮件内容
+  let code = Email.smtp.code();
+  let expire = Email.smtp.expire();
   let mailOptions = {
     from: `认证邮件<${Email.smtp.user}>`,
-    to: ko.email,
+    to: email,
     subject: '仿美团网注册码', //主题
-    html: `您的仿美团网注册码为：${ko.code}`
+    html: `您的仿美团网注册码为：${code}，有效期为90秒`
   };
   // 发送
   await transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
-      return console.log('error');
+      return console.log('error:发送邮件失败');
     } else {
       Store.hmset(
-        `nodemail:${ko.user}`,
+        `nodemail:${email}`,
         'code',
-        ko.code,
+        code,
         'expire',
-        ko.expire,
+        expire,
         'email',
-        ko.email
+        email
       );
     }
   });
   ctx.body = {
     code: 0,
-    msg: '注册码已发送，有效期为三分钟'
+    msg: 'ok',
+    expire: 90
   };
 });
 

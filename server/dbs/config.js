@@ -34,7 +34,7 @@ export default {
     //   过期时间
     get expire() {
       return () => {
-        return new Date().getTime() + 60 * 1000 * 3;
+        return new Date().getTime() + 90 * 1000;
       };
     }
   }
