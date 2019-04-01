@@ -1,10 +1,10 @@
 # meituanPC-vue
 
-> My stupendous Nuxt.js project
+> 一个 Nuxt.js 项目，服务端用的 node，框架用的 koa
 
 ## Build Setup
 
-``` bash
+```bash
 # install dependencies
 $ npm install
 
@@ -20,3 +20,5 @@ $ npm run generate
 ```
 
 For detailed explanation on how things work, checkout [Nuxt.js docs](https://nuxtjs.org).
+
+> 需要注意在启动项目之前，请先启动 mongodb 和 redis
