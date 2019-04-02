@@ -17,7 +17,7 @@
       </el-form-item>
       <el-button class="getCode" @click="getCode">{{getCode_btnText}}</el-button>
       <el-form-item label="动态码" prop="verificationCode">
-        <el-input v-model.number="params.verificationCode"></el-input>
+        <el-input v-model="params.verificationCode"></el-input>
       </el-form-item>
       <el-form-item label="创建密码" prop="pass">
         <el-input v-model="params.pass" type="password" autocomplete="off"></el-input>
@@ -58,7 +58,7 @@ export default {
       if (!value) {
         return callback(new Error("请输入短信动态码"));
       }
-      if (value.toString().length !== 6) {
+      if (value.toString().length !== 4) {
         return callback(new Error("输入错误，请重新输入"));
       }
       callback();
@@ -104,7 +104,26 @@ export default {
     registerHandler() {
       this.$refs["registerForm"].validate(valid => {
         if (valid) {
-          console.log("注册");
+          this.$axios
+            .post("/users/signup", {
+              username: this.params.mobil,
+              password: this.params.pass,
+              email: this.params.email,
+              code: this.params.verificationCode
+            })
+            .then(res => {
+              if (res.status === 200 && res.data.code === 0) {
+                this.$message({
+                  message: "注册成功，稍后自动跳转至登录页",
+                  type: "success"
+                });
+                setTimeout(() => {
+                  this.$router.push("/login");
+                }, 2000);
+              } else {
+                this.$message.error(res.data.msg);
+              }
+            });
         } else {
           return false;
         }
