@@ -112,7 +112,7 @@ export default {
       message: "",
       codeImg: "",
       getCodeText: "获取手机动态码",
-      showVerificationCode: true,
+      showVerificationCode: false,
       showCodeTips: false,
       loginType: "passLogin",
       leftImg: require("@/static/images/login_left.jpg"),
@@ -134,7 +134,34 @@ export default {
       this.loginType =
         this.loginType === "passLogin" ? "codeLogin" : "passLogin";
     },
-    loginHandler() {},
+    loginHandler() {
+      // 暂时只支持账号（注册时的手机号）密码登录
+
+      let reg = /[^\d]/g;
+      if (
+        this.formParams.account.search(reg) !== -1 ||
+        this.formParams.account.length !== 11
+      ) {
+        this.message = "请输入正确的手机号";
+        return;
+      }
+      if (this.formParams.password.length < 6) {
+        this.message = "账号或密码错误";
+        return;
+      }
+      this.$axios
+        .post("/users/signin", {
+          username: this.formParams.account,
+          password: this.formParams.password
+        })
+        .then(res => {
+          if (res.status === 200 && res.data.code === 0) {
+            this.$router.push("/");
+          } else {
+            this.$message.error(res.data.msg);
+          }
+        });
+    },
     updateCodeImg() {},
     getCode() {}
   }

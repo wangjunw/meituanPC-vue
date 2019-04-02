@@ -1,6 +1,7 @@
 /**
  * 用户验证
  */
+import crypto from 'crypto';
 import passport from 'koa-passport'; //专门针对于koa的passport
 import LocalStrategy from 'passport-local'; //passport本地的一个策略
 import UserModel from '../../dbs/models/users';
@@ -9,9 +10,10 @@ passport.use(
     let where = {
       username
     };
+    let md5 = crypto.createHash('md5');
     let result = await UserModel.findOne(where);
     if (result !== null) {
-      if (password === result.password) {
+      if (md5.update(password).digest('hex') === result.password) {
         return done(null, result);
       } else {
         return done(null, false, '密码错误');

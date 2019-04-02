@@ -95,7 +95,10 @@ router.post('/signup', async ctx => {
   }
 });
 
-// 登录接口
+/**
+ * 登录接口
+ * 暂时不支持手机动态码登录
+ */
 router.post('/signin', async (ctx, next) => {
   return Passport.authenticate('local', (err, user, info, status) => {
     if (err) {
@@ -114,7 +117,7 @@ router.post('/signin', async (ctx, next) => {
       } else {
         ctx.body = {
           code: 1,
-          mes: info
+          msg: info
         };
       }
     }
