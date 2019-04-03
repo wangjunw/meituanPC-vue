@@ -65,6 +65,11 @@ export default {
     guessLink,
     mtNavigation
   },
+  mounted() {
+    this.$axios.get("/users/getUser").then(res => {
+      console.log(res);
+    });
+  },
   methods: {},
   computed: {}
 };

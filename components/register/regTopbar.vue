@@ -4,7 +4,7 @@
       <a href="/" class="logo" :style="logoStyle"></a>
       <div>
         <span>已有美团账号？</span>
-        <nuxt-link to="/login">
+        <nuxt-link to="/account/login">
           <el-button size="mini" type="success">登录</el-button>
         </nuxt-link>
       </div>

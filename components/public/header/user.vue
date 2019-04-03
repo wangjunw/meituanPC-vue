@@ -5,8 +5,8 @@
       <nuxt-link to="/exit" class="user-link">[退出]</nuxt-link>
     </template>
     <template v-else>
-      <nuxt-link to="/login" class="user-link login">立即登录</nuxt-link>
-      <nuxt-link to="/register" class="user-link register">注册</nuxt-link>
+      <nuxt-link to="/account/login" class="user-link login">立即登录</nuxt-link>
+      <nuxt-link to="/account/register" class="user-link register">注册</nuxt-link>
     </template>
   </div>
 </template>

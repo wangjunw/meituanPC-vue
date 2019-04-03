@@ -118,7 +118,7 @@ export default {
                   type: "success"
                 });
                 setTimeout(() => {
-                  this.$router.push("/login");
+                  this.$router.push("/account/login");
                 }, 2000);
               } else {
                 this.$message.error(res.data.msg);

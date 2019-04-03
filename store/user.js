@@ -1,8 +1,8 @@
 export const state = () => ({
-  username: ''
+  user: {
+    username: ''
+  }
 });
 export const mutations = {
-  LOGIN: () => {
-    console.log('登录');
-  }
+
 };
