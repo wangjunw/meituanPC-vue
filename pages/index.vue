@@ -43,6 +43,7 @@ import maoyanMovie from "@/components/home/maoyanMovie.vue";
 import recommendedHomestay from "@/components/home/recommendedHomestay.vue";
 import guessLink from "@/components/home/guessLike.vue";
 import mtNavigation from "@/components/home/mtNavigation.vue";
+import { mapActions } from "vuex";
 export default {
   data() {
     return {
@@ -67,10 +68,16 @@ export default {
   },
   mounted() {
     this.$axios.get("/users/getUser").then(res => {
-      console.log(res);
+      if (res.status === 200 && res.data.code === 0) {
+        this.initUser(res.data.userInfo);
+      } else {
+        this.$messsage.error("获取用户信息失败");
+      }
     });
   },
-  methods: {},
+  methods: {
+    ...mapActions(["initUser"])
+  },
   computed: {}
 };
 </script>

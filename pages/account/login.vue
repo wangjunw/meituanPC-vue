@@ -71,7 +71,7 @@
         <button class="loginBtn" @click="loginHandler">登 录</button>
         <div class="toRegister" v-if="loginType === 'passLogin'">
           还没有账号？
-          <nuxt-link to="/register">免费注册</nuxt-link>
+          <nuxt-link to="/account/register">免费注册</nuxt-link>
         </div>
         <div v-else class="tips">
           提示： 未注册美团账号的手机号，登录时将自动注册美团账号，且代表您已同意

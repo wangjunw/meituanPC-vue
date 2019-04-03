@@ -69,24 +69,20 @@ router.post('/signup', async ctx => {
   });
   // 通过调用登录接口，检验是否创建用户成功
   if (newUser) {
-    ctx.body = {
-      code: 0,
-      msg: '注册成功'
-    };
     // 以下是自动登录验证是否注册成功
-    // let res = await axios.post('/users/signin', { username, password });
-    // if (res.data && res.data.code === 0) {
-    //   ctx.body = {
-    //     code: 0,
-    //     msg: '注册成功',
-    //     user: res.data.user
-    //   };
-    // } else {
-    //   ctx.body = {
-    //     code: -1,
-    //     msg: '自动登录失败'
-    //   };
-    // }
+    let res = await axios.post('/users/signin', { username, password });
+    if (res.data && res.data.code === 0) {
+      ctx.body = {
+        code: 0,
+        msg: '注册成功',
+        user: res.data.user
+      };
+    } else {
+      ctx.body = {
+        code: -1,
+        msg: '自动登录失败'
+      };
+    }
   } else {
     ctx.body = {
       code: -1,
@@ -201,16 +197,20 @@ router.get('/exit', async (ctx, next) => {
 
 // 获取用户接口
 router.get('/getUser', async ctx => {
-  if (ctx.isAuthentiicated()) {
+  if (ctx.isAuthenticated()) {
     const { username, email } = ctx.session.passport.user;
     ctx.body = {
-      user: username,
-      email
+      code: 0,
+      msg: 'ok',
+      userInfo: {
+        username,
+        email
+      }
     };
   } else {
     ctx.body = {
-      user: '',
-      email: ''
+      code: -1,
+      msg: '获取个人信息失败'
     };
   }
 });
