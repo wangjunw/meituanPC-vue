@@ -1,80 +1,86 @@
-.m-findPass{
-    color: #666;
-    font-size: 12px;
-    main{
-        width: 1190px;
-        margin: 0 auto;
-        padding-top: 50px;
-        .title{
-            border-bottom: solid 2px #ddd;
-            color: #333;
-            font-size: 18px;
-            margin-bottom: 19px;
-            span{
-                padding: 12px 0;
-                display: inline-block;
-                margin-bottom: -2px;
-                border-bottom: solid 2px #333;
-            }
-        }
-        .progressRate{
-            color: #666;
-            font-size: 14px;
-            display: flex;
-            justify-content: space-between;
-            text-align: center;
-            margin-bottom: 30px;
-            li{
-                width: 24.9%;
-                background-color: #dedede;
-                line-height: 30px;
-                &:first-of-type{
-                    border-top-left-radius: 3px;
-                    border-bottom-left-radius: 3px;
-                }
-                &:last-of-type{
-                    border-top-right-radius: 3px;
-                    border-bottom-right-radius: 3px;
-                }
-                &.currentStep{
-                    background-color: #06C1AE;
-                    color: #fff;
-                }
-            }
-        }
-        .container{
-            font-size: 16px;
-            color: #333;
-            border: solid 1px #ddd;
-            height: 330px;
-            margin-bottom: 60px;
-            padding-bottom: 58px;
-            box-sizing: border-box;
-            &>div{
-                width: 300px;
-                margin: 0 auto;
-                &>*{
-                    width: 100%;
-                }
-                .el-button--success{
-                    background-color: #06C1AE;
-                    border: none;
-                    font-size: 16px;
-                }
-            }
-            .step1{
-                p{
-                    padding-top: 67px;
-                }
-                input.account{
-                    background-color: rgb(232, 240, 254);
-                    border: none;
-                    font-size: 16px;
-                    border-bottom: 1px solid #d8d8d8;
-                    margin: 50px 0 30px;
-                }
-                
-            }
-        }
+.m-findPass {
+  color: #666;
+  font-size: 12px;
+  main {
+    width: 1190px;
+    margin: 0 auto;
+    padding-top: 50px;
+    .title {
+      border-bottom: solid 2px #ddd;
+      color: #333;
+      font-size: 18px;
+      margin-bottom: 19px;
+      span {
+        padding: 12px 0;
+        display: inline-block;
+        margin-bottom: -2px;
+        border-bottom: solid 2px #333;
+      }
     }
+    .progressRate {
+      color: #666;
+      font-size: 14px;
+      display: flex;
+      justify-content: space-between;
+      text-align: center;
+      margin-bottom: 30px;
+      li {
+        width: 24.9%;
+        background-color: #dedede;
+        line-height: 30px;
+        &:first-of-type {
+          border-top-left-radius: 3px;
+          border-bottom-left-radius: 3px;
+        }
+        &:last-of-type {
+          border-top-right-radius: 3px;
+          border-bottom-right-radius: 3px;
+        }
+        &.currentStep {
+          background-color: #06c1ae;
+          color: #fff;
+        }
+      }
+    }
+    .container {
+      font-size: 16px;
+      color: #333;
+      border: solid 1px #ddd;
+      height: 330px;
+      margin-bottom: 60px;
+      padding: 65px 0 58px;
+      box-sizing: border-box;
+      & > div {
+        width: 300px;
+        margin: 0 auto;
+        & > * {
+          width: 100%;
+        }
+        .el-button--success {
+          background-color: #06c1ae;
+          border: none;
+          font-size: 16px;
+        }
+        .desc {
+          margin-bottom: 40px;
+        }
+      }
+      input.account {
+        background-color: rgb(232, 240, 254);
+        border: none;
+        font-size: 16px;
+        border-bottom: 1px solid #d8d8d8;
+        margin: 0 0 30px;
+      }
+      .step1 {
+      }
+      .step2 {
+        .tips {
+          font-size: 12px;
+        }
+      }
+      .step3 {
+      }
+    }
+  }
 }
