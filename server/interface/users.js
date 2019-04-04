@@ -197,7 +197,10 @@ router.get('/exit', async (ctx, next) => {
   }
 });
 router.post('/updatePassword', async (ctx, next) => {
-
+  ctx.body = {
+    code: 0,
+    msg: '密码修改成功'
+  }
 });
 
 // 获取用户信息接口
