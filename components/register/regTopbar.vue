@@ -30,6 +30,9 @@ export default {
 .register_top {
   border-bottom: solid 2px #2bb8aa;
   padding: 10px 0;
+  span {
+    font-size: 16px;
+  }
   > div {
     width: 980px;
     display: flex;

@@ -178,7 +178,9 @@ router.post('/verify', async (ctx, next) => {
   };
 });
 
-// 退出接口
+/**
+ * 退出接口
+ */
 router.get('/exit', async (ctx, next) => {
   await ctx.logout(); //执行退出动作
   //验证是否退出
@@ -194,8 +196,11 @@ router.get('/exit', async (ctx, next) => {
     };
   }
 });
+router.post('/updatePassword', async (ctx, next) => {
 
-// 获取用户接口
+});
+
+// 获取用户信息接口
 router.get('/getUser', async ctx => {
   if (ctx.isAuthenticated()) {
     const { username, email } = ctx.session.passport.user;

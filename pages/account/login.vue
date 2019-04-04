@@ -31,6 +31,7 @@
               placeholder="手机号/用户名/邮箱"
               class="_input accountInput"
               v-model="formParams.account"
+              @keyup.enter="loginHandler"
             >
             <i class="passIcon" :style="loginIconStyle"></i>
             <input
@@ -38,6 +39,7 @@
               class="_input passInput"
               placeholder="密码"
               v-model="formParams.password"
+              @keyup.enter="loginHandler"
             >
             <div class="verificationCode" v-if="showVerificationCode">
               <input
@@ -66,7 +68,7 @@
         </div>
 
         <p class="forgetPass">
-          <nuxt-link to="/findPassword">忘记密码？</nuxt-link>
+          <nuxt-link to="/account/findPassword">忘记密码？</nuxt-link>
         </p>
         <button class="loginBtn" @click="loginHandler">登 录</button>
         <div class="toRegister" v-if="loginType === 'passLogin'">
@@ -136,7 +138,6 @@ export default {
     },
     loginHandler() {
       // 暂时只支持账号（注册时的手机号）密码登录
-
       let reg = /[^\d]/g;
       if (
         this.formParams.account.search(reg) !== -1 ||
@@ -168,6 +169,6 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-@import "@/assets/css/login/login.scss";
+@import "@/assets/css/account/login.scss";
 </style>
 

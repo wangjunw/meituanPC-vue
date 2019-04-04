@@ -20,6 +20,7 @@ export default {
 footer {
   border-top: solid 1px #eee;
   padding-top: 20px;
+  color: #999;
   a {
     color: #999;
     &:hover {

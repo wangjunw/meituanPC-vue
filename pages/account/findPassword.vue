@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="m-findPass">
     <reg-topbar/>
     <main>找回密码</main>
     <login-nav/>
@@ -19,3 +19,6 @@ export default {
   }
 };
 </script>
+<style lang="scss" scoped>
+@import "@/assets/css/account/findPass.scss";
+</style>
