@@ -1,8 +1,8 @@
 <template>
   <div class="m-user">
-    <template v-if="user !== ''">
-      <nuxt-link to="/my" class="user-link">{{user}}</nuxt-link>
-      <nuxt-link to="/exit" class="user-link">[退出]</nuxt-link>
+    <template v-if="userInfo">
+      <nuxt-link to="/my" class="user-link">{{userInfo.username}}</nuxt-link>
+      <a href="javascript:;" @click="exitHandler" class="user-link">[退出]</a>
     </template>
     <template v-else>
       <nuxt-link to="/account/login" class="user-link login">立即登录</nuxt-link>
@@ -11,11 +11,30 @@
   </div>
 </template>
 <script>
+import { mapState, mapMutations } from "vuex";
 export default {
   data() {
-    return {
-      user: ""
-    };
+    return {};
+  },
+  computed: {
+    ...mapState({
+      userInfo: state => state.user.userInfo
+    })
+  },
+  methods: {
+    ...mapMutations({
+      resetUserInfo: "user/INIT_USER"
+    }),
+    exitHandler() {
+      this.$axios.get("/users/exit").then(res => {
+        if (res.status === 200 && res.data.code === 0) {
+          this.$router.push("/account/login");
+          this.resetUserInfo(null);
+        } else {
+          this.$message.error("退出失败");
+        }
+      });
+    }
   }
 };
 </script>

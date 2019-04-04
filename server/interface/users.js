@@ -70,24 +70,24 @@ router.post('/signup', async ctx => {
   // 通过调用登录接口，检验是否创建用户成功
   if (newUser) {
     // 以下是自动登录验证是否注册成功
-    let res = await axios.post('/users/signin', { username, password });
-    if (res.data && res.data.code === 0) {
-      ctx.body = {
-        code: 0,
-        msg: '注册成功',
-        user: res.data.user
-      };
-    } else {
-      ctx.body = {
-        code: -1,
-        msg: '自动登录失败'
-      };
-    }
-  } else {
+    //let res = await axios.post('/users/signin', { username, password });
+    //if (res.data && res.data.code === 0) {
     ctx.body = {
-      code: -1,
-      msg: '注册失败'
+      code: 0,
+      msg: '注册成功',
+      // user: res.data.user
     };
+    //   } else {
+    //     ctx.body = {
+    //       code: -1,
+    //       msg: '自动登录失败'
+    //     };
+    //   }
+    // } else {
+    //   ctx.body = {
+    //     code: -1,
+    //     msg: '注册失败'
+    //   };
   }
 });
 
@@ -180,9 +180,9 @@ router.post('/verify', async (ctx, next) => {
 
 // 退出接口
 router.get('/exit', async (ctx, next) => {
-  await ctx.logout(); //执行推出动作
+  await ctx.logout(); //执行退出动作
   //验证是否退出
-  if (!ctx.isAuthentiicated()) {
+  if (!ctx.isAuthenticated()) {
     ctx.body = {
       code: 0,
       msg: '退出成功'

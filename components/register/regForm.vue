@@ -56,7 +56,7 @@ export default {
     };
     let validateCode = (rule, value, callback) => {
       if (!value) {
-        return callback(new Error("请输入短信动态码"));
+        return callback(new Error("请输入邮箱动态码"));
       }
       if (value.toString().length !== 4) {
         return callback(new Error("输入错误，请重新输入"));

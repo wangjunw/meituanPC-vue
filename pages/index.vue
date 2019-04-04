@@ -43,7 +43,7 @@ import maoyanMovie from "@/components/home/maoyanMovie.vue";
 import recommendedHomestay from "@/components/home/recommendedHomestay.vue";
 import guessLink from "@/components/home/guessLike.vue";
 import mtNavigation from "@/components/home/mtNavigation.vue";
-import { mapActions } from "vuex";
+import { mapMutations } from "vuex";
 export default {
   data() {
     return {
@@ -66,7 +66,7 @@ export default {
     guessLink,
     mtNavigation
   },
-  mounted() {
+  created() {
     this.$axios.get("/users/getUser").then(res => {
       if (res.status === 200 && res.data.code === 0) {
         this.initUser(res.data.userInfo);
@@ -76,9 +76,10 @@ export default {
     });
   },
   methods: {
-    ...mapActions(["initUser"])
-  },
-  computed: {}
+    ...mapMutations({
+      initUser: "user/INIT_USER"
+    })
+  }
 };
 </script>
 

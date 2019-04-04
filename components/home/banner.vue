@@ -16,8 +16,8 @@
       <el-col :span="6">
         <div class="loginAndRegister">
           <img :src="avatar" class="avatar">
-          <p class="hi">{{name===''?'Hi，你好':name}}</p>
-          <div v-if="name === ''">
+          <p class="hi">{{userInfo==null?'Hi，你好':userInfo.username}}</p>
+          <div v-if="!userInfo">
             <div class="registerBtn">
               <el-button round>注册</el-button>
             </div>
@@ -66,11 +66,11 @@
   </div>
 </template>
 <script>
+import { mapState } from "vuex";
 export default {
   data() {
     return {
       avatar: require("@/static/images/avatar.jpg"),
-      name: "均",
 
       userCenter: [
         {
@@ -112,6 +112,11 @@ export default {
         }
       ]
     };
+  },
+  computed: {
+    ...mapState({
+      userInfo: state => state.user.userInfo
+    })
   }
 };
 </script>
