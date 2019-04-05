@@ -259,9 +259,22 @@ router.post('/checkUser', async ctx => {
  * 修改密码接口
  */
 router.post('/updatePassword', async (ctx, next) => {
-  ctx.body = {
-    code: 0,
-    msg: '密码修改成功'
-  };
+  let { username, newPassword } = ctx.request.body;
+  const md5 = crypto.createHash('md5');
+  let result = await User.updateOne(
+    { username },
+    { password: md5.update(newPassword).digest('hex') }
+  );
+  if (result.ok === 1) {
+    ctx.body = {
+      code: 0,
+      msg: '密码修改成功'
+    };
+  } else {
+    ctx.body = {
+      code: -1,
+      msg: '密码失败'
+    };
+  }
 });
 export default router;

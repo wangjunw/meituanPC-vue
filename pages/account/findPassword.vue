@@ -63,12 +63,20 @@
         </div>
         <div v-else-if="currentStep === 3" class="step3">
           <p class="desc">请为你的账号{{''}}设置一个新密码</p>
-          <input class="account" type="password" placeholder="请设置8-32位(数字+字母)">
+          <div class="newPassForm">
+            <input
+              class="account"
+              v-model="newPassword"
+              :type="newPassInputType"
+              placeholder="请设置6-32位密码"
+            >
+            <i v-if="newPassword !== ''" class="el-icon-view viewPass" @click="changeInputType"></i>
+          </div>
           <el-button type="success" @click="saveNewPass">保存新密码</el-button>
         </div>
         <div v-else class="step4">
-          <h2>恭喜您已经成功修改了登录密码</h2>
-          <p>您的登录密码已经重新设置，请妥善保管</p>
+          <h3>恭喜您已经成功修改了登录密码</h3>
+          <p class="text">您的登录密码已经重新设置，请妥善保管</p>
           <el-button type="success" @click="toLogin">立即登录</el-button>
         </div>
       </div>
@@ -92,6 +100,8 @@ export default {
         email: "",
         code: ""
       },
+      newPassword: "",
+      newPassInputType: "password",
       currentStep: 1,
       tipsType: "success",
       tipsText: "验证码以发送，请稍后",
@@ -165,8 +175,35 @@ export default {
         }
       });
     },
-    saveNewPass() {},
-    toLogin() {}
+    changeInputType() {
+      this.newPassInputType =
+        this.newPassInputType === "text" ? "password" : "text";
+    },
+    saveNewPass() {
+      if (this.newPassword.length < 6) {
+        this.$message.error("请输入正确的密码");
+        return;
+      }
+      this.$axios
+        .post("/users/updatePassword", {
+          username: this.step1Params.account,
+          newPassword: this.newPassword
+        })
+        .then(res => {
+          if (res.status === 200 && res.data.code === 0) {
+            this.$message({
+              message: "恭喜你，密码修改成功",
+              type: "success"
+            });
+            this.currentStep = 4;
+          } else {
+            this.$message.error("修改密码失败，请重新尝试");
+          }
+        });
+    },
+    toLogin() {
+      this.$router.push("/account/login");
+    }
   }
 };
 </script>

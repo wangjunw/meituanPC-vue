@@ -86,6 +86,28 @@
         }
       }
       .step3 {
+        .newPassForm {
+          position: relative;
+          input {
+            width: 100%;
+          }
+          .viewPass {
+            position: absolute;
+            top: 2px;
+            right: 8px;
+            cursor: pointer;
+          }
+        }
+      }
+      .step4 {
+        h3 {
+          font-weight: 700;
+          color: #000;
+          margin-bottom: 25px;
+        }
+        .text {
+          margin-bottom: 25px;
+        }
       }
     }
   }
