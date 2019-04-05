@@ -74,7 +74,7 @@ router.post('/signup', async ctx => {
     //if (res.data && res.data.code === 0) {
     ctx.body = {
       code: 0,
-      msg: '注册成功',
+      msg: '注册成功'
       // user: res.data.user
     };
     //   } else {
@@ -196,14 +196,10 @@ router.get('/exit', async (ctx, next) => {
     };
   }
 });
-router.post('/updatePassword', async (ctx, next) => {
-  ctx.body = {
-    code: 0,
-    msg: '密码修改成功'
-  }
-});
 
-// 获取用户信息接口
+/**
+ * 获取用户信息接口
+ */
 router.get('/getUser', async ctx => {
   if (ctx.isAuthenticated()) {
     const { username, email } = ctx.session.passport.user;
@@ -223,4 +219,49 @@ router.get('/getUser', async ctx => {
   }
 });
 
+/**
+ * 重置密码时，校验邮箱和验证码的接口
+ * 手机账号、邮箱、验证码
+ */
+router.post('/checkUser', async ctx => {
+  const { username, email, code } = ctx.request.body;
+  let user = await User.find({ username });
+  if (user.length === 0 || user[0].email !== email) {
+    ctx.body = {
+      code: -1,
+      msg: '邮箱与账号不匹配'
+    };
+    return;
+  }
+  const saveCode = await Store.hget(`nodemail:${email}`, 'code');
+  if (saveCode !== code) {
+    ctx.body = {
+      code: -1,
+      msg: '验证码输入错误'
+    };
+    return;
+  }
+  const saveExpire = await Store.hget(`nodemail:${email}`, 'expire');
+  if (saveExpire - new Date().getTime() < 0) {
+    ctx.body = {
+      code: -1,
+      msg: '验证码已失效'
+    };
+    return;
+  }
+  ctx.body = {
+    code: 0,
+    msg: '验证通过'
+  };
+});
+
+/**
+ * 修改密码接口
+ */
+router.post('/updatePassword', async (ctx, next) => {
+  ctx.body = {
+    code: 0,
+    msg: '密码修改成功'
+  };
+});
 export default router;

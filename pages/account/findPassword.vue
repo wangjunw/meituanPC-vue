@@ -23,20 +23,41 @@
         </div>
         <div v-else-if="currentStep === 2" class="step2">
           <p class="desc">为了您的账户安全，请先验证邮箱</p>
-          <div class="tips" v-if="showtips">
-            <i class="el-icon-success successIcon" v-if="tipsType === success"></i>
-            <i class="el-icon-warning warningIcon" v-else></i>
-            {{tipsText}}
+          <div class="tips" v-if="showTips">
+            <el-alert
+              :title="tipsText"
+              :closable="false"
+              type="success"
+              show-icon
+              v-if="tipsType === 'success'"
+            ></el-alert>
+            <el-alert :title="tipsText" :closable="false" type="warning" show-icon v-else></el-alert>
           </div>
-          <el-form label-width="60px" :model="formParams">
-            <el-form-item label="邮箱">
+          <el-form label-width="70px" :model="step2Params" ref="checkEmailForm">
+            <el-form-item
+              label="邮箱"
+              prop="email"
+              :rules="[
+            {
+              required: true, message: '请输入邮箱地址', trigger: 'blur'
+            },
+            {
+              type: 'email', message: '请输入正确的邮箱地址', trigger: 'blur'
+            }]"
+            >
               <el-input v-model="step2Params.email"></el-input>
             </el-form-item>
-            <el-form-item label="验证码">
+            <el-form-item
+              label="验证码"
+              style="position: relative;"
+              prop="code"
+              :rules="[{required: true, message: '请填写验证码', trigger: 'blur'}]"
+            >
               <el-input v-model="step2Params.code"></el-input>
+              <span class="getCodeText" @click="getCode">{{getCodeText}}</span>
             </el-form-item>
             <el-form-item>
-              <el-button round @click="checkEmail">下一步</el-button>
+              <el-button round @click="checkHandler">下一步</el-button>
             </el-form-item>
           </el-form>
         </div>
@@ -74,7 +95,8 @@ export default {
       currentStep: 1,
       tipsType: "success",
       tipsText: "验证码以发送，请稍后",
-      showTips: true
+      showTips: false,
+      getCodeText: "获取验证码"
     };
   },
   components: {
@@ -86,7 +108,63 @@ export default {
     confirmAccount() {
       this.currentStep = 2;
     },
-    checkEmail() {},
+    getCode() {
+      this.$refs["checkEmailForm"].validateField("email", valid => {
+        if (valid || this.getCodeText !== "获取验证码") {
+          return false;
+        } else {
+          this.$axios
+            .post("/users/verify", { email: this.step2Params.email })
+            .then(res => {
+              if (res.status === 200 && res.data.code === 0) {
+                let expire = res.data.expire;
+                let timer = setInterval(() => {
+                  expire -= 1;
+                  if (expire === 0) {
+                    clearInterval(timer);
+                    this.getCodeText = `获取验证码`;
+                    return;
+                  }
+                  this.getCodeText = `${expire}s后重新获取`;
+                }, 1000);
+                this.tipsType = "success";
+                this.showTips = true;
+                this.tipsText = "验证码已发送，请稍后";
+              } else {
+                this.tipsType = "warning";
+                this.showTips = true;
+                this.tipsText = res.data.msg || "获取验证码失败，请重试";
+              }
+            });
+        }
+      });
+    },
+    checkHandler() {
+      this.$refs["checkEmailForm"].validate(valid => {
+        if (valid) {
+          this.$axios
+            .post("/users/checkUser", {
+              username: this.step1Params.account,
+              email: this.step2Params.email,
+              code: this.step2Params.code
+            })
+            .then(res => {
+              if (res.status === 200 && res.data.code === 0) {
+                this.tipsType = "success";
+                this.showTips = true;
+                this.tipsText = "恭喜您，验证码通过";
+                this.currentStep = 3;
+              } else {
+                this.tipsType = "warning";
+                this.showTips = true;
+                this.tipsText = res.data.msg || "验证失败，请重试";
+              }
+            });
+        } else {
+          return false;
+        }
+      });
+    },
     saveNewPass() {},
     toLogin() {}
   }

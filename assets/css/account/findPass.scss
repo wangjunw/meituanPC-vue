@@ -46,7 +46,6 @@
       font-size: 16px;
       color: #333;
       border: solid 1px #ddd;
-      height: 330px;
       margin-bottom: 60px;
       padding: 65px 0 58px;
       box-sizing: border-box;
@@ -72,11 +71,18 @@
         border-bottom: 1px solid #d8d8d8;
         margin: 0 0 30px;
       }
-      .step1 {
-      }
       .step2 {
         .tips {
           font-size: 12px;
+          position: relative;
+          top: -20px;
+        }
+        .getCodeText {
+          position: absolute;
+          right: 8px;
+          top: 0;
+          color: #999;
+          cursor: pointer;
         }
       }
       .step3 {
