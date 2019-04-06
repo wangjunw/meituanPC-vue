@@ -1,16 +1,15 @@
 <template>
   <div class="m-geo">
     <i class="el-icon-location"></i>
-    <span>{{city}}</span>
+    <span>{{$store.state.position.city}}</span>
     <nuxt-link to="/changeCity" class="changeCity">切换城市</nuxt-link>[大厂回族自治县 廊坊 固安县]
   </div>
 </template>
 <script>
+import { mapState } from "vuex";
 export default {
   data() {
-    return {
-      city: "北京"
-    };
+    return {};
   }
 };
 </script>
