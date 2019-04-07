@@ -2,7 +2,7 @@
   <div class="m-style">
     <title-bar title="有格调" :tabs="tabs" bgcolor="rgb(190, 164, 116)"></title-bar>
     <ul>
-      <li></li>
+      <li v-if="item in currentType+Data"></li>
     </ul>
   </div>
 </template>
@@ -11,6 +11,7 @@ import titleBar from "@/components/home/titleBar.vue";
 export default {
   data() {
     return {
+      currentType: "all",
       tabs: [
         {
           type: "all",
@@ -33,12 +34,17 @@ export default {
           text: "品质出游"
         }
       ],
-      data: []
+      allData: [],
+      dinnerData: [],
+      spaData: [],
+      movieData: [],
+      tourData: []
     };
   },
   components: {
     titleBar
-  }
+  },
+  created() {}
 };
 </script>
 <style lang="scss" scoped>
