@@ -7,8 +7,8 @@
       <el-col :span="19">
         <div class="tabLink">
           <ul class="tabLinks">
-            <li v-for="item in tabLinks" :key="item">
-              <a href>{{item}}</a>
+            <li v-for="item in tabLinks" :key="item.name">
+              <a :href="item.link">{{item.name}}</a>
             </li>
           </ul>
         </div>
@@ -48,12 +48,32 @@ export default {
   data() {
     return {
       tabLinks: [
-        "美团外卖",
-        "猫眼电影",
-        "美团酒店",
-        "民宿 / 公寓",
-        "商家入驻",
-        "美团公益"
+        {
+          name: "美团外卖",
+          link: "http://waimai.meituan.com"
+        },
+        {
+          name: "猫眼电影",
+          link: "https://maoyan.com"
+        },
+        {
+          name: "美团酒店",
+          link: "https://hotel.meituan.com"
+        },
+        {
+          name: "民宿 / 公寓",
+          link:
+            "https://phoenix.meituan.com/?phx_wake_up_type=mtpc_category&phx_wake_up_source=nav_bar"
+        },
+        {
+          name: "商家入驻",
+          link:
+            "https://ecom.meituan.com/bizsettle/settle/merchantsSettle?utm_source=mtxz"
+        },
+        {
+          name: "美团公益",
+          link: "https://gongyi.meituan.com/"
+        }
       ]
     };
   },
@@ -71,7 +91,7 @@ export default {
       if (res.status === 200 && res.data.code === 0) {
         this.initUser(res.data.userInfo);
       } else {
-        this.$messsage.error("获取用户信息失败");
+        this.$message.error("获取用户信息失败");
       }
     });
   },
@@ -94,5 +114,32 @@ export default {
   font-size: 16px;
   font-weight: 700;
   color: black;
+  a {
+    color: #333;
+  }
+  &:last-of-type,
+  &:nth-of-type(2),
+  &:nth-of-type(3) {
+    a {
+      &:hover {
+        color: #f04d4e;
+      }
+    }
+  }
+  &:first-of-type,
+  &:nth-of-type(4) {
+    a {
+      &:hover {
+        color: #fbc700;
+      }
+    }
+  }
+  &:nth-of-type(5) {
+    a {
+      &:hover {
+        color: #31bbac;
+      }
+    }
+  }
 }
 </style>

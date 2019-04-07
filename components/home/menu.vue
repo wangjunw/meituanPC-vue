@@ -3,7 +3,7 @@
     <div class="menu">
       <h3 class="title">全部分类</h3>
       <ul @mouseleave="mouseleaveHandler">
-        <li v-for="item in menuList" :key="item.icon" @mouseenter="mouseenterHandler(item.type)">
+        <li v-for="item in menuList" :key="item.type" @mouseenter="mouseenterHandler(item.type)">
           <i :class="item.icon" class="iconfont fontIcon"></i>
           {{item.name}}
           <span v-if="item.isHot" class="hot">HOT</span>

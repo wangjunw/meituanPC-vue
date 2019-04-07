@@ -1,6 +1,10 @@
 import Router from 'koa-router';
 let router = new Router({ prefix: '/geo' });
+import Province from '../dbs/models/provinces';
 import axios from 'axios';
+/**
+ * 根据ip获取地理位置的接口
+ */
 router.get('/getPosition', async ctx => {
   let ip = ctx.request.ip;
   let {
@@ -17,6 +21,21 @@ router.get('/getPosition', async ctx => {
       city: '北京'
     };
   }
+});
+
+/**
+ * 获取省份接口
+ */
+router.get('/province', async ctx => {
+  let province = await Province.find();
+  ctx.body = {
+    province: province.map(item => {
+      return {
+        id: item.id,
+        name: item.value
+      };
+    })
+  };
 });
 
 export default router;

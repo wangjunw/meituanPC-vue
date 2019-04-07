@@ -8,31 +8,34 @@
         <div class="center">
           <div style="fontSize: 0; paddingLeft: 20px;position: relative;">
             <input
-              v-model="keyword"
               placeholder="搜索商家或地点"
               @focus="focusHandler"
               @blur="blurHandler"
               @input="inputHandler"
-              @keydown="searchHandler"
+              @keyup.enter="searchHandler"
               class="el-input"
             >
             <el-button type="success" icon="el-icon-search" @click="searchHandler"></el-button>
             <div class="smartRecommendLayer" v-if="isHot">
               <dl class="hot">
                 <dt>热门搜索</dt>
-                <dd v-for="item in recommendList" :key="item">{{item}}</dd>
+                <dd v-for="item in recommendList.slice(0,7)" :key="item.id">
+                  <nuxt-link to="/">{{item.name}}</nuxt-link>
+                </dd>
               </dl>
             </div>
             <div class="smartRecommendLayer" v-if="isMatch">
               <ul class="match">
-                <li>列表</li>
-                <li>列表</li>
-                <li>列表</li>
+                <li v-for="item in searchResult" :key="item.id">
+                  <nuxt-link to="/">{{item.name}}</nuxt-link>
+                </li>
               </ul>
             </div>
           </div>
           <ul class="recommend">
-            <li v-for="item in recommendList" :key="item">{{item}}</li>
+            <li v-for="item in recommendList.slice(0,8)" :key="item.id">
+              <nuxt-link to="/">{{item.name}}</nuxt-link>
+            </li>
           </ul>
         </div>
       </el-col>
@@ -44,9 +47,25 @@ export default {
   data() {
     return {
       keyword: "",
-      recommendList: ["北京欢乐谷", "故宫博物院", "北京动物园"],
-      isFocus: false
+      recommendList: [],
+      isFocus: false,
+      searchResult: []
     };
+  },
+  created() {
+    this.$axios
+      .get("/home/recommendPlace", {
+        params: {
+          city: this.$store.state.position.city
+        }
+      })
+      .then(res => {
+        if (res.status === 200 && res.data.code === 0) {
+          this.recommendList = res.data.data;
+        } else {
+          console.log("获取推荐景点失败");
+        }
+      });
   },
   methods: {
     focusHandler() {
@@ -56,12 +75,27 @@ export default {
       this.isFocus = false;
     },
     inputHandler(e) {
-      // console.log(e.target.value);
+      this.keyword = e.target.value;
+      this.$axios
+        .get("/home/search", {
+          params: {
+            city: this.$store.state.position.city,
+            keyword: this.keyword
+          }
+        })
+        .then(res => {
+          if (res.status === 200 && res.data.code === 0) {
+            this.searchResult = res.data.data;
+          } else {
+            this.searchResult = [];
+          }
+        });
     },
     searchHandler(e) {
-      if ((e.type === "keydown" && e.keyCode === "13") || e.type === "click") {
-        console.log("提交");
+      if (this.keyword === "") {
+        return;
       }
+      console.log("提交");
     }
   },
   computed: {
@@ -111,6 +145,9 @@ export default {
   li {
     margin-right: 10px;
     display: inline-block;
+    a {
+      color: #999;
+    }
   }
 }
 
@@ -136,11 +173,16 @@ export default {
       color: #666;
       display: inline-block;
       margin-right: 15px;
+      a {
+        color: #666;
+      }
     }
   }
   .match li {
     padding: 5px 10px;
-    color: #333;
+    a {
+      color: #333;
+    }
     &:hover {
       color: #31bbac;
       background-color: #f8f8f8;
