@@ -39,9 +39,9 @@ export default {
     };
   },
   created() {
-    this.$axios.get("/home/getMenu").then(res => {
-      if (res.status === 200 && res.data.code === 0) {
-        this.menuList = res.data.data;
+    this.$axios.$get("/home/getMenu").then(res => {
+      if (res.code === 0) {
+        this.menuList = res.data;
       } else {
         this.menuList = [];
       }

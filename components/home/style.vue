@@ -2,7 +2,7 @@
   <div class="m-style">
     <title-bar title="有格调" :tabs="tabs" bgcolor="rgb(190, 164, 116)"></title-bar>
     <ul>
-      <li v-if="item in currentType+Data"></li>
+      <li></li>
     </ul>
   </div>
 </template>

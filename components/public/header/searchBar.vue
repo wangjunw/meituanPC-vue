@@ -54,14 +54,14 @@ export default {
   },
   created() {
     this.$axios
-      .get("/home/recommendPlace", {
+      .$get("/home/recommendPlace", {
         params: {
           city: this.$store.state.position.city
         }
       })
       .then(res => {
-        if (res.status === 200 && res.data.code === 0) {
-          this.recommendList = res.data.data;
+        if (res.code === 0) {
+          this.recommendList = res.data;
         } else {
           console.log("获取推荐景点失败");
         }
@@ -77,15 +77,15 @@ export default {
     inputHandler(e) {
       this.keyword = e.target.value;
       this.$axios
-        .get("/home/search", {
+        .$get("/home/search", {
           params: {
             city: this.$store.state.position.city,
             keyword: this.keyword
           }
         })
         .then(res => {
-          if (res.status === 200 && res.data.code === 0) {
-            this.searchResult = res.data.data;
+          if (res.code === 0) {
+            this.searchResult = res.data;
           } else {
             this.searchResult = [];
           }
