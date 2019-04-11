@@ -92,7 +92,7 @@ export default {
         this.initUser(res.userInfo);
       } else {
         this.$message.error("获取用户信息失败");
-        this.$router.push("/account/login");
+        // this.$router.push("/account/login");
       }
     });
   },

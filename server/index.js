@@ -12,6 +12,7 @@ import passport from './interface/utils/passport';
 import users from './interface/users';
 import geo from './interface/geo';
 import home from './interface/home';
+import movie from './interface/movie';
 
 const app = new Koa();
 
@@ -67,6 +68,7 @@ async function start() {
   app.use(users.routes()).use(users.allowedMethods());
   app.use(geo.routes()).use(geo.allowedMethods());
   app.use(home.routes()).use(home.allowedMethods());
+  app.use(movie.routes()).use(movie.allowedMethods());
   app.use(ctx => {
     ctx.status = 200;
     ctx.respond = false; // Bypass Koa's built-in response handling

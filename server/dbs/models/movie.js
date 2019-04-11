@@ -25,7 +25,7 @@ const MovieSchema = new Schema({
     type: Number
   },
   pubDate: {
-    type: Date
+    type: Number
   }
 });
 export default mongoose.model('Movie', MovieSchema);

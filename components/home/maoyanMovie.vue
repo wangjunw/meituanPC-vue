@@ -6,6 +6,24 @@
       bgcolor="linear-gradient(to right, rgb(250, 60, 104) 2%, rgb(254, 70, 77) 97%) rgb(250, 60, 104);"
       moreLink="https://maoyan.com/?utm_source=meituanweb"
     ></title-bar>
+    <div>
+      <el-carousel trigger="click" height="150px" v-if="currentType === 'hot'">
+        <el-carousel-item>
+          <div v-for="item in hotFilms" :key="item.id"></div>
+        </el-carousel-item>
+        <el-carousel-item>
+          <div v-for="item in hotFilms" :key="item.id"></div>
+        </el-carousel-item>
+      </el-carousel>
+      <el-carousel trigger="click" height="150px" v-else>
+        <el-carousel-item>
+          <div v-for="item in comingFilms" :key="item.id"></div>
+        </el-carousel-item>
+        <el-carousel-item>
+          <div v-for="item in comingFilms" :key="item.id"></div>
+        </el-carousel-item>
+      </el-carousel>
+    </div>
   </div>
 </template>
 <script>
@@ -15,16 +33,35 @@ export default {
     return {
       tabs: [
         {
-          type: "ing",
+          type: "hot",
           text: "正在热映"
         },
         {
-          type: "will",
+          type: "coming",
           text: "即将上映"
         }
-      ]
+      ],
+      hotFilms: [],
+      comingFilms: [],
+      currentTab: "hot"
     };
   },
-  components: { titleBar }
+  components: { titleBar },
+  created() {
+    this.$axios.$get("/catMovie/getHotFilms").then(res => {
+      if (res.code === 0) {
+        this.hotFilms = res.data;
+      } else {
+        this.hotFilms = [];
+      }
+    });
+    this.$axios.$get("/catMovie/getComingFilms").then(res => {
+      if (res.code === 0) {
+        this.comingFilms = res.data;
+      } else {
+        this.comingFilms = [];
+      }
+    });
+  }
 };
 </script>

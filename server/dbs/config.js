@@ -16,11 +16,11 @@ export default {
       return 587;
     },
     get user() {
-      return 'xx@qq.com';
+      return '1157593964@qq.com';
     },
     get pass() {
       // 在邮箱配置里开启POP3/SMTP服务和IMAP/SMTP服务获取该密码
-      return 'xx';
+      return 'xfszcteejrhhigea';
     },
     //   随机验证码
     get code() {
