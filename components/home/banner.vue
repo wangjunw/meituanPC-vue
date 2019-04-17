@@ -19,9 +19,9 @@
           <p class="hi">{{userInfo==null?'Hi，你好':userInfo.username}}</p>
           <div v-if="!userInfo">
             <div class="registerBtn">
-              <el-button round>注册</el-button>
+              <el-button round @click="toRegister">注册</el-button>
             </div>
-            <el-button round>立即登录</el-button>
+            <el-button round @click="toLogin">立即登录</el-button>
           </div>
           <div v-else class="userCenter">
             <ul>
@@ -117,6 +117,14 @@ export default {
     ...mapState({
       userInfo: state => state.user.userInfo
     })
+  },
+  methods: {
+    toLogin() {
+      this.$router.push("/account/login");
+    },
+    toRegister() {
+      this.$router.push("/account/register");
+    }
   }
 };
 </script>

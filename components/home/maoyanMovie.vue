@@ -3,31 +3,51 @@
     <title-bar
       title="猫眼电影"
       :tabs="tabs"
-      bgcolor="linear-gradient(to right, rgb(250, 60, 104) 2%, rgb(254, 70, 77) 97%) rgb(250, 60, 104);"
+      bgcolor="rgb(250, 60, 104);"
       moreLink="https://maoyan.com/?utm_source=meituanweb"
+      @current="changeType"
     ></title-bar>
     <div>
-      <el-carousel trigger="click" height="150px" v-if="currentType === 'hot'">
-        <el-carousel-item>
-          <div v-for="item in hotFilms" :key="item.id"></div>
-        </el-carousel-item>
-        <el-carousel-item>
-          <div v-for="item in hotFilms" :key="item.id"></div>
-        </el-carousel-item>
-      </el-carousel>
-      <el-carousel trigger="click" height="150px" v-else>
-        <el-carousel-item>
-          <div v-for="item in comingFilms" :key="item.id"></div>
-        </el-carousel-item>
-        <el-carousel-item>
-          <div v-for="item in comingFilms" :key="item.id"></div>
-        </el-carousel-item>
-      </el-carousel>
+      <div v-if="currentTab === 'hot'">
+        <el-carousel
+          trigger="click"
+          height="327px"
+          v-if="hotFilms.length !== 0"
+          :autoplay="false"
+          :loop="false"
+        >
+          <el-carousel-item>
+            <film :filmData="hotFilmsPart1"/>
+          </el-carousel-item>
+          <el-carousel-item>
+            <film :filmData="hotFilmsPart2"/>
+          </el-carousel-item>
+        </el-carousel>
+        <p v-else>暂无热映资源</p>
+      </div>
+      <div v-else>
+        <el-carousel
+          trigger="click"
+          height="327px"
+          v-if="comingFilms.length !== 0"
+          :autoplay="false"
+          :loop="false"
+        >
+          <el-carousel-item>
+            <film :filmData="comingFilmsPart1"/>
+          </el-carousel-item>
+          <el-carousel-item>
+            <film :filmData="comingFilmsPart2"/>
+          </el-carousel-item>
+        </el-carousel>
+        <p v-else>暂无即将上映资源</p>
+      </div>
     </div>
   </div>
 </template>
 <script>
 import titleBar from "@/components/home/titleBar.vue";
+import Film from "@/components/home/film.vue";
 export default {
   data() {
     return {
@@ -43,10 +63,11 @@ export default {
       ],
       hotFilms: [],
       comingFilms: [],
-      currentTab: "hot"
+      currentTab: "hot",
+      everyCounts: 5
     };
   },
-  components: { titleBar },
+  components: { titleBar, Film },
   created() {
     this.$axios.$get("/catMovie/getHotFilms").then(res => {
       if (res.code === 0) {
@@ -62,6 +83,25 @@ export default {
         this.comingFilms = [];
       }
     });
+  },
+  computed: {
+    hotFilmsPart1() {
+      return this.hotFilms.slice(0, 5);
+    },
+    hotFilmsPart2() {
+      return this.hotFilms.slice(5, 10);
+    },
+    comingFilmsPart1() {
+      return this.comingFilms.slice(0, 5);
+    },
+    comingFilmsPart2() {
+      return this.comingFilms.slice(5, 10);
+    }
+  },
+  methods: {
+    changeType(e) {
+      this.currentTab = e;
+    }
   }
 };
 </script>

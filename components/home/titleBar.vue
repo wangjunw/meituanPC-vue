@@ -7,7 +7,7 @@
         :key="item.type"
         class="tab"
         :class="{active: currentTab === index}"
-        @mouseenter="mouseEnterHandler(index)"
+        @mouseenter="mouseEnterHandler(index, item.type)"
       >{{item.text}}</li>
       <li class="all" v-if="moreLink !== ''">
         <a :href="moreLink">
@@ -35,8 +35,9 @@ export default {
     }
   },
   methods: {
-    mouseEnterHandler(index) {
+    mouseEnterHandler(index, type) {
       this.currentTab = index;
+      this.$emit("current", type);
     }
   }
 };
