@@ -2,6 +2,8 @@ import Router from 'koa-router';
 import Menu from '../dbs/models/menu';
 import Recommendplace from '../dbs/models/recommendplace';
 import Topsearch from '../dbs/models/topsearch';
+import Mtnav from '../dbs/models/mtnav';
+import Guesslike from '../dbs/models/guesslike';
 let router = new Router({ prefix: '/home' });
 /**
  * 菜单接口
@@ -74,5 +76,37 @@ router.get('/search', async ctx => {
       data: []
     };
   }
+});
+
+// 猜你喜欢接口
+router.get('/guesslike', async ctx => {
+  let data = await Guesslike.find();
+  if (!data) {
+    ctx.body = {
+      code: -1,
+      data: []
+    };
+    return;
+  }
+  ctx.body = {
+    code: 0,
+    data: data[0].data
+  };
+});
+
+// 美团导航接口
+router.get('/mtnav', async ctx => {
+  let data = await Mtnav.find();
+  if (!data) {
+    ctx.body = {
+      code: -1,
+      data: []
+    };
+    return;
+  }
+  ctx.body = {
+    code: 0,
+    data: data[0].data
+  };
 });
 export default router;

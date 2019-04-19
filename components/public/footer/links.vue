@@ -313,6 +313,7 @@
 </template>
 <style scoped>
 .links {
+  margin-top: 40px;
   padding: 40px 45px;
   border-top: solid 1px #e5e5e5;
   display: flex;

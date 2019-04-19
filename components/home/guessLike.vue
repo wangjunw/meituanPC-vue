@@ -15,6 +15,11 @@ export default {
       tabs: [{ type: "1", text: "为你甄选最合适的" }]
     };
   },
-  components: { titleBar }
+  components: { titleBar },
+  created() {
+    this.$axios.$get("/home/guesslike").then(res => {
+      console.log(res);
+    });
+  }
 };
 </script>

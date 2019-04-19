@@ -7,11 +7,11 @@
       moreLink="https://maoyan.com/?utm_source=meituanweb"
       @current="changeType"
     ></title-bar>
-    <div>
+    <div class="warp">
       <div v-if="currentTab === 'hot'">
         <el-carousel
           trigger="click"
-          height="327px"
+          height="336px"
           v-if="hotFilms.length !== 0"
           :autoplay="false"
           :loop="false"
@@ -23,12 +23,12 @@
             <film :filmData="hotFilmsPart2"/>
           </el-carousel-item>
         </el-carousel>
-        <p v-else>暂无热映资源</p>
+        <p v-else class="nodata">暂无热映资源</p>
       </div>
       <div v-else>
         <el-carousel
           trigger="click"
-          height="327px"
+          height="336px"
           v-if="comingFilms.length !== 0"
           :autoplay="false"
           :loop="false"
@@ -40,7 +40,7 @@
             <film :filmData="comingFilmsPart2"/>
           </el-carousel-item>
         </el-carousel>
-        <p v-else>暂无即将上映资源</p>
+        <p v-else class="nodata">暂无即将上映资源</p>
       </div>
     </div>
   </div>
@@ -105,3 +105,14 @@ export default {
   }
 };
 </script>
+<style lang="scss" scoped>
+.warp {
+  border: 1px solid #e5e5e5;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  .nodata {
+    text-align: center;
+    height: 336px;
+  }
+}
+</style>

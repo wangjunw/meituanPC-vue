@@ -45,6 +45,7 @@ export default {
 
 <style lang="scss" scoped>
 .m-titleBar {
+  margin-top: 40px;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   color: #fff;
@@ -73,7 +74,7 @@ export default {
       border-bottom: solid 7px #fff;
       border-right: 5px solid transparent;
       border-left: solid 5px transparent;
-      top: 24px;
+      top: 25px;
       width: 2px;
       left: 0;
       right: 0;

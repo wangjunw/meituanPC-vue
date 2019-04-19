@@ -2,8 +2,9 @@
   <ul>
     <li v-for="item in filmData" :key="item.id">
       <img class="pic" :src="item.img" alt width="100%" height="297px;">
+      <img :src="image_3dmax" alt v-if="is3D(item.ver)" class="_3dmax">
       <div class="desc">
-        <p v-if="item.score !== 0">
+        <p v-if="item.pubDate - now < 0">
           观众评
           <span>{{item.score}}</span>
         </p>
@@ -20,7 +21,8 @@
 export default {
   data() {
     return {
-      now: new Date().getTime()
+      now: new Date().getTime(),
+      image_3dmax: require("@/static/images/imax3d.png")
     };
   },
   props: {
@@ -28,12 +30,20 @@ export default {
       type: Array,
       default: []
     }
-  }
+  },
+  methods: {
+    is3D(ver) {
+      let reg = /3D/g;
+      return reg.test(ver);
+    }
+  },
+  computed: {}
 };
 </script>
 <style lang="scss" scoped>
 ul {
-  padding: 15px 1px 15px 15px;
+  padding: 18px 1px 18px 20px;
+  box-sizing: border-box;
 }
 li {
   display: inline-block;
@@ -43,6 +53,13 @@ li {
   color: #fff;
   .pic {
     border-radius: 4px;
+  }
+  ._3dmax {
+    position: absolute;
+    width: 78px;
+    height: 20px;
+    left: -5px;
+    top: 10px;
   }
   .desc {
     position: absolute;
@@ -68,6 +85,7 @@ li {
     border-radius: 100px;
     font-size: 14px;
     padding: 2px 12px 3px;
+    cursor: pointer;
   }
 }
 </style>
