@@ -7,7 +7,7 @@
       moreLink="https://maoyan.com/?utm_source=meituanweb"
       @current="changeType"
     ></title-bar>
-    <div class="warp">
+    <div class="home-content">
       <div v-if="currentTab === 'hot'">
         <el-carousel
           trigger="click"
@@ -86,16 +86,16 @@ export default {
   },
   computed: {
     hotFilmsPart1() {
-      return this.hotFilms.slice(0, 5);
+      return this.hotFilms.slice(0, this.everyCounts);
     },
     hotFilmsPart2() {
-      return this.hotFilms.slice(5, 10);
+      return this.hotFilms.slice(this.everyCounts, 10);
     },
     comingFilmsPart1() {
-      return this.comingFilms.slice(0, 5);
+      return this.comingFilms.slice(0, this.everyCounts);
     },
     comingFilmsPart2() {
-      return this.comingFilms.slice(5, 10);
+      return this.comingFilms.slice(this.everyCounts, 10);
     }
   },
   methods: {
@@ -106,13 +106,8 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.warp {
-  border: 1px solid #e5e5e5;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
-  .nodata {
-    text-align: center;
-    height: 336px;
-  }
+.nodata {
+  text-align: center;
+  height: 336px;
 }
 </style>

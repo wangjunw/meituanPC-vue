@@ -143,4 +143,10 @@ export default {
     }
   }
 }
+.home-content {
+  background: #fff;
+  border: solid 1px #e5e5e5;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
 </style>
