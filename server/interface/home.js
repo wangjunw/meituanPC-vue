@@ -2,6 +2,7 @@ import Router from 'koa-router';
 import Menu from '../dbs/models/menu';
 import Recommendplace from '../dbs/models/recommendplace';
 import Topsearch from '../dbs/models/topsearch';
+import Minsu from '../dbs/models/minsu';
 import Mtnav from '../dbs/models/mtnav';
 import Guesslike from '../dbs/models/guesslike';
 let router = new Router({ prefix: '/home' });
@@ -76,6 +77,23 @@ router.get('/search', async ctx => {
       data: []
     };
   }
+});
+
+//推荐民宿
+router.get('/minsu', async ctx => {
+  let cityId = ctx.query.cityId;
+  let result = await Minsu.find({ cityId });
+  if (!result || !result[0].list) {
+    ctx.body = {
+      code: -1,
+      msg: '没有相关数据'
+    };
+    return;
+  }
+  ctx.body = {
+    code: 0,
+    list: result[0].list
+  };
 });
 
 // 猜你喜欢接口
