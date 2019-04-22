@@ -16,9 +16,9 @@
       </el-col>
     </el-row>
     <el-row>
-      <el-col :span="24">
+      <!-- <el-col :span="24">
         <mt-style/>
-      </el-col>
+      </el-col>-->
       <el-col :span="24">
         <maoyan-movie/>
       </el-col>
