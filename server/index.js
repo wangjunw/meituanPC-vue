@@ -13,6 +13,7 @@ import users from './interface/users';
 import geo from './interface/geo';
 import home from './interface/home';
 import movie from './interface/movie';
+import city from './interface/city';
 
 const app = new Koa();
 
@@ -69,6 +70,7 @@ async function start() {
   app.use(geo.routes()).use(geo.allowedMethods());
   app.use(home.routes()).use(home.allowedMethods());
   app.use(movie.routes()).use(movie.allowedMethods());
+  app.use(city.routes()).use(city.allowedMethods());
   app.use(ctx => {
     ctx.status = 200;
     ctx.respond = false; // Bypass Koa's built-in response handling
