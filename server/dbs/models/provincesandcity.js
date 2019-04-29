@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
 
-const CitySchema = new Schema({
+const ProvinceSchema = new Schema({
   id: {
     type: String,
     require: true,
@@ -12,9 +12,9 @@ const CitySchema = new Schema({
     type: String,
     require: true
   },
-  province: {
-    type: String
+  value: {
+    type: Array
   }
 });
 
-export default mongoose.model('city', CitySchema);
+export default mongoose.model('provincesandcity', ProvinceSchema);

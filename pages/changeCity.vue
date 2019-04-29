@@ -10,20 +10,32 @@
         v-model="currentSelectCity"
         placeholder="请选择"
         :disabled="currentSelectProvince === ''"
+        @change="changeCity"
       >
         <el-option v-for="item in cities" :key="item.id" :value="item.name"></el-option>
       </el-select>
       <span class="selectType">直接搜索：</span>
-      <el-autocomplete
+      <el-select
         v-model="cityName"
-        :fetch-suggestions="querySearchAsync"
+        filterable
+        remote
         placeholder="请输入城市中文或拼音"
-        @select="handleSelectCity"
-      ></el-autocomplete>
+        :remote-method="querySearchAsync"
+        :loading="queryAsyncLoading"
+        @change="changeCity"
+      >
+        <el-option
+          v-for="item in queryAsyncData"
+          :key="item.iid"
+          :label="item.name"
+          :value="item.name"
+        ></el-option>
+      </el-select>
     </div>
   </div>
 </template>
 <script>
+import { mapMutations } from "vuex";
 export default {
   data() {
     return {
@@ -31,7 +43,9 @@ export default {
       currentSelectProvince: "",
       currentSelectCity: "",
       cities: [],
+      queryAsyncData: [],
       cityName: "",
+      queryAsyncLoading: false,
       hotCity: [],
       recentCity: [],
       matchCitys: []
@@ -46,6 +60,9 @@ export default {
     });
   },
   methods: {
+    ...mapMutations({
+      initPosition: "INIT_POSITION"
+    }),
     changeProvince(e) {
       this.currentSelectProvince = e;
       this.provinces.map(item => {
@@ -54,7 +71,23 @@ export default {
         }
       });
     },
-    querySearchAsync() {},
+    changeCity(e) {
+      this.initPosition({ city: e });
+      this.$router.push("/");
+    },
+    querySearchAsync(v) {
+      this.queryAsyncLoading = true;
+      this.$axios
+        .$get("/city/searchByKeyword", { params: { keyword: v } })
+        .then(res => {
+          this.queryAsyncLoading = false;
+          if (res.code !== 0) {
+            this.queryAsyncData = [];
+            return;
+          }
+          this.queryAsyncData = res.data;
+        });
+    },
     handleSelectCity(item) {
       console.log(item);
     }
