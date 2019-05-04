@@ -3,7 +3,7 @@ let router = new Router({ prefix: '/city' });
 import provincesandcity from '../dbs/models/provincesandcity';
 import city from '../dbs/models/city';
 import recentCity from '../dbs/models/recentcity';
-// 随便取了前几个
+// 热门城市接口，随便取了前几个
 router.get('/hotCity', async ctx => {
   let result = await city.find();
   if (!result) {
@@ -18,6 +18,7 @@ router.get('/hotCity', async ctx => {
     data: result.slice(0, 10)
   };
 });
+// 最近访问接口
 router.get('/recent', async ctx => {
   let { username, city } = ctx.query;
   let result = await recentCity.findOne({ username });
@@ -45,6 +46,7 @@ router.get('/recent', async ctx => {
     data: recentCitise
   };
 });
+// 搜索接口
 router.get('/searchByKeyword', async ctx => {
   let keyword = ctx.query.keyword;
   var reg = new RegExp(keyword, 'gi');
@@ -59,13 +61,29 @@ router.get('/searchByKeyword', async ctx => {
   }
   ctx.body = { code: 0, data: result };
 });
-router.get('/citys', async ctx => {
+// 省市二级联动接口
+router.get('/provincesandcity', async ctx => {
   let result = await provincesandcity.find();
   if (!result) {
     ctx.body = {
       code: -1,
       message: '数据查询失败'
     };
+  }
+  ctx.body = {
+    code: 0,
+    data: result
+  };
+});
+//所有城市，通过字母查询接口
+router.get('/cities', async ctx => {
+  let result = await city.find();
+  if (!result) {
+    ctx.body = {
+      code: -1,
+      message: '没有相关数据'
+    };
+    return;
   }
   ctx.body = {
     code: 0,

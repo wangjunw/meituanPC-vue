@@ -47,14 +47,24 @@
     <div class="baseFirstLetter">
       <span class="selectType">按拼音首字母选择：</span>
       <ul class="letterList">
-        <li v-for="item in letters" :key="item">{{item}}</li>
+        <li v-for="item in letters" :key="item">
+          <a :href="'#city-'+item">{{item}}</a>
+        </li>
       </ul>
     </div>
-    <div style="text-align: center">暂无数据</div>
+    <div class="groups">
+      <dl v-for="group in citiesByLetter" :key="group.title">
+        <dt :id="'city-'+group.title">{{group.title}}</dt>
+        <dd>
+          <span v-for="item in group.list" :key="item" @click="changeCity(item)">{{item}}</span>
+        </dd>
+      </dl>
+    </div>
   </div>
 </template>
 <script>
 import { mapMutations, mapState } from "vuex";
+import pinyin from "js-pinyin";
 export default {
   data() {
     return {
@@ -68,7 +78,8 @@ export default {
       hotCity: [],
       recentCity: [],
       matchCitys: [],
-      letters: "ABCDEFGHJKLMNPQRSTWXYZ"
+      letters: "ABCDEFGHJKLMNPQRSTWXYZ",
+      citiesByLetter: []
     };
   },
   computed: {
@@ -81,13 +92,14 @@ export default {
     this.getProvinces();
     this.getHotCities();
     this.getRecentCities();
+    this.getAllCities();
   },
   methods: {
     ...mapMutations({
       initPosition: "INIT_POSITION"
     }),
     getProvinces() {
-      this.$axios.$get("/city/citys").then(res => {
+      this.$axios.$get("/city/provincesandcity").then(res => {
         if (res.code !== 0) {
           this.provinces = [];
           return;
@@ -120,9 +132,6 @@ export default {
           this.queryAsyncData = res.data;
         });
     },
-    handleSelectCity(item) {
-      console.log(item);
-    },
     getHotCities() {
       // 没有实现，随便取了前几个
       this.$axios.$get("/city/hotCity").then(res => {
@@ -145,6 +154,44 @@ export default {
           }
           this.recentCity = res.data;
         });
+    },
+    getAllCities() {
+      this.$axios.$get("/city/cities").then(res => {
+        if (res.code !== 0) {
+          return;
+        }
+        const cities = res.data;
+        let firstLetter = "";
+        let code = "";
+        let group = {};
+        cities.forEach(item => {
+          // 通过js-pinyin的方法获取小写首字母
+          firstLetter = pinyin
+            .getFullChars(item.name)
+            .toUpperCase()
+            .slice(0, 1);
+          // 获取对应的ASCII码
+          code = firstLetter.charCodeAt();
+          // 拼数据结构
+          if (code > 64 && code < 91) {
+            if (!group[firstLetter]) {
+              group[firstLetter] = [];
+            }
+            group[firstLetter].push(item.name);
+          }
+        });
+        // 把数据放在数组中
+        let result = [];
+        for (let [key, value] of Object.entries(group)) {
+          result.push({ title: key, list: value });
+        }
+
+        // 根据首字母排序
+        result.sort((a, b) => {
+          return a.title.charCodeAt() - b.title.charCodeAt();
+        });
+        this.citiesByLetter = result;
+      });
     }
   }
 };
@@ -178,8 +225,7 @@ export default {
     align-items: center;
     padding: 30px 0;
     .hotList,
-    .recentList,
-    .letterList {
+    .recentList {
       padding-left: 20px;
       li {
         float: left;
@@ -188,6 +234,59 @@ export default {
         &:hover {
           color: #13d1be;
           cursor: pointer;
+        }
+      }
+    }
+  }
+  .letterList {
+    li {
+      float: left;
+      a {
+        color: #666;
+        border-radius: 50%;
+        width: 25px;
+        height: 25px;
+        font-size: 14px;
+        line-height: 25px;
+        text-align: center;
+        display: inline-block;
+        margin: 0 10px;
+        &:hover {
+          background: #f8f8f8;
+        }
+      }
+    }
+  }
+  .groups {
+    dl {
+      display: flex;
+      padding: 13px 30px 13px 10px;
+      box-sizing: border-box;
+      border-radius: 5px;
+      &:hover {
+        background: #f8f8f8;
+      }
+      dt {
+        width: 40px;
+        height: 40px;
+        background: #13d1be;
+        color: #fff;
+        border-radius: 50%;
+        box-shadow: 0 4px 5px 0 rgba(39, 178, 164, 0.22);
+        text-align: center;
+        line-height: 40px;
+        font-size: 16px;
+      }
+      dd {
+        flex: 1;
+        span {
+          float: left;
+          margin: 10px 20px;
+          font-size: 14px;
+          cursor: pointer;
+          &:hover {
+            color: #13d1be;
+          }
         }
       }
     }
