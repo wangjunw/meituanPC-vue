@@ -33,6 +33,9 @@
     font-size: 13px;
     line-height: 1.65;
     padding: 0 10px;
+    .text {
+      cursor: pointer;
+    }
     .hot {
       opacity: 0.5;
       color: #02b59d;
@@ -97,5 +100,6 @@
     margin-right: 15px;
     margin-bottom: 10px;
     color: #999;
+    cursor: pointer;
   }
 }

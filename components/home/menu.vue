@@ -5,7 +5,7 @@
       <ul @mouseleave="mouseleaveHandler">
         <li v-for="item in menuList" :key="item.type" @mouseenter="mouseenterHandler(item.type)">
           <i :class="item.icon" class="iconfont fontIcon"></i>
-          {{item.name}}
+          <span class="text" @click="toList(item.name)">{{item.name}}</span>
           <span v-if="item.isHot" class="hot">HOT</span>
           <span class="iconfont iconarrow-right-copy-copy-copy arrow"></span>
         </li>
@@ -25,7 +25,7 @@
             <i class="iconfont iconarrow-right-copy-copy-copy"></i>
           </a>
         </h4>
-        <span v-for="v in item.child" :key="v" class="detailText">{{v}}</span>
+        <span v-for="v in item.child" :key="v" class="detailText" @click="toList(v)">{{v}}</span>
       </template>
     </div>
   </div>
@@ -61,6 +61,9 @@ export default {
     },
     detailLeaveHandler() {
       this.currentType = "";
+    },
+    toList(keyword) {
+      this.$router.push({ name: "list", params: { keyword } });
     }
   },
   computed: {

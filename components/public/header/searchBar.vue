@@ -2,7 +2,9 @@
   <div>
     <el-row class="search">
       <el-col :span="5">
-        <img src="../../../static/images/logo.png" alt="美团" width="120">
+        <nuxt-link to="/">
+          <img src="../../../static/images/logo.png" alt="美团" width="120">
+        </nuxt-link>
       </el-col>
       <el-col :span="19">
         <div class="center">
@@ -20,21 +22,21 @@
               <dl class="hot">
                 <dt>热门搜索</dt>
                 <dd v-for="item in recommendList.slice(0,7)" :key="item.id">
-                  <nuxt-link to="/">{{item.name}}</nuxt-link>
+                  <nuxt-link :to="{name: 'list', params:{keyword: item.name}}">{{item.name}}</nuxt-link>
                 </dd>
               </dl>
             </div>
             <div class="smartRecommendLayer" v-if="isMatch">
               <ul class="match">
                 <li v-for="item in searchResult" :key="item.id">
-                  <nuxt-link to="/">{{item.name}}</nuxt-link>
+                  <nuxt-link :to="{name: 'list', params:{keyword: item.name}}">{{item.name}}</nuxt-link>
                 </li>
               </ul>
             </div>
           </div>
           <ul class="recommend">
             <li v-for="item in recommendList.slice(0,8)" :key="item.id">
-              <nuxt-link to="/">{{item.name}}</nuxt-link>
+              <nuxt-link :to="{name: 'list',params:{keyword: item.name}}">{{item.name}}</nuxt-link>
             </li>
           </ul>
         </div>
@@ -72,7 +74,9 @@ export default {
       this.isFocus = true;
     },
     blurHandler() {
-      this.isFocus = false;
+      setTimeout(() => {
+        this.isFocus = false;
+      }, 200);
     },
     inputHandler(e) {
       this.keyword = e.target.value;
