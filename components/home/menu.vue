@@ -63,7 +63,7 @@ export default {
       this.currentType = "";
     },
     toList(keyword) {
-      this.$router.push({ name: "list", params: { keyword } });
+      this.$router.push("/list/" + keyword);
     }
   },
   computed: {

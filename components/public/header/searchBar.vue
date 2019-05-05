@@ -22,21 +22,21 @@
               <dl class="hot">
                 <dt>热门搜索</dt>
                 <dd v-for="item in recommendList.slice(0,7)" :key="item.id">
-                  <nuxt-link :to="{name: 'list', params:{keyword: item.name}}">{{item.name}}</nuxt-link>
+                  <nuxt-link :to="'/list/'+ item.name">{{item.name}}</nuxt-link>
                 </dd>
               </dl>
             </div>
             <div class="smartRecommendLayer" v-if="isMatch">
               <ul class="match">
                 <li v-for="item in searchResult" :key="item.id">
-                  <nuxt-link :to="{name: 'list', params:{keyword: item.name}}">{{item.name}}</nuxt-link>
+                  <nuxt-link :to="'/list/'+ item.name">{{item.name}}</nuxt-link>
                 </li>
               </ul>
             </div>
           </div>
           <ul class="recommend">
             <li v-for="item in recommendList.slice(0,8)" :key="item.id">
-              <nuxt-link :to="{name: 'list',params:{keyword: item.name}}">{{item.name}}</nuxt-link>
+              <nuxt-link :to="'/list/'+ item.name">{{item.name}}</nuxt-link>
             </li>
           </ul>
         </div>
