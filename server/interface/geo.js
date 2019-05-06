@@ -12,7 +12,7 @@ router.get('/getPosition', async ctx => {
     data: { location }
   } = await axios.get(`http://ip.360.cn/IPShare/info`);
   let city = location.split('\t')[0];
-  if (status === 200 && city !== '内网IP') {
+  if (status === 200 && city !== '内网IP' && city !== '未知地点') {
     ctx.body = {
       city
     };

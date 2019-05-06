@@ -4,7 +4,7 @@
       <el-breadcrumb-item :to="{ path: '/' }">{{city}}美团</el-breadcrumb-item>
       <el-breadcrumb-item>{{city+keyword}}</el-breadcrumb-item>
     </el-breadcrumb>
-    <el-row gutter="10">
+    <el-row :gutter="10">
       <el-col :span="19">
         <div class="selectArea">
           <category-select></category-select>
