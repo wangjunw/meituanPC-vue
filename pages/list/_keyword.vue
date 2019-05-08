@@ -7,7 +7,8 @@
     <el-row :gutter="10">
       <el-col :span="19">
         <div class="selectArea">
-          <category-select></category-select>
+          <category-select :category="category.types" label="分类"></category-select>
+          <category-select :category="category.areas" label="区域"></category-select>
         </div>
         <div class="listArea">
           <product-list></product-list>
@@ -28,13 +29,27 @@ export default {
   data() {
     return {
       keyword: this.$route.params.keyword,
-      point: [116.397428, 39.90923]
+      point: [116.397428, 39.90923],
+      category: { types: [], areas: [] }
     };
   },
   components: {
     AMap,
     CategorySelect,
     ProductList
+  },
+  created() {
+    this.$axios
+      .$get("/list/category", { params: { city: this.city } })
+      .then(res => {
+        if (res.code !== 0) {
+          return;
+        }
+        this.category = res.data;
+      })
+      .catch(() => {
+        this.category = {};
+      });
   },
   computed: {
     ...mapState({
