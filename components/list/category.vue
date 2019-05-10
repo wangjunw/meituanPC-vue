@@ -7,7 +7,10 @@
       <el-col :span="2">
         <el-button type="success" round size="mini" class="allBtn">全部</el-button>
       </el-col>
-      <el-col :span="20" style="border-bottom: solid 1px #e5e5e5">
+      <el-col
+        :span="20"
+        :style="isLast?'border-bottom: none;': 'border-bottom: solid 1px #e5e5e5;'"
+      >
         <el-popover
           placement="bottom"
           width="400"
@@ -21,7 +24,9 @@
               v-for="i in item.module"
               :key="i"
               style="display: inline-block; width: 25%;margin-bottom: 5px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap"
-            >{{i}}</dd>
+            >
+              <nuxt-link to="/detail" style="color: #666;">{{i}}</nuxt-link>
+            </dd>
           </dl>
           <span slot="reference" class="select">
             {{item.type}}
@@ -43,6 +48,9 @@ export default {
     },
     label: {
       type: String
+    },
+    isLast: {
+      type: Boolean
     }
   }
 };
@@ -57,14 +65,6 @@ export default {
   }
   .allBtn {
     padding: 3px 7px;
-  }
-}
-.popover {
-  .pop {
-    padding: 10px;
-    .item {
-      float: left;
-    }
   }
 }
 </style>
