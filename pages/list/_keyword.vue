@@ -34,15 +34,16 @@
               <i class="el-icon-d-caret" v-if="item.value === 'price'"></i>
             </span>
           </div>
-          <div v-if="list.length !== 0">
-            <product-item v-for="item in list" :key="item.id" :data="item"></product-item>
-          </div>
-          <div v-else class="noData">抱歉，暂无数据</div>
+          <product-list :listData="list"></product-list>
         </div>
       </el-col>
       <el-col :span="5">
-        <div :style="{position:posiType, top: 0}" ref="mapRef">
-          <a-map id="listMap" width="230px" height="220px" :point="point"></a-map>
+        <div :style="{position:posiType, top: 0, zIndex: 3}" ref="mapRef">
+          <a-map id="listMap" width="240px" height="220px" :point="point"></a-map>
+        </div>
+        <div class="guessLike">
+          <h2>猜你喜欢</h2>
+          <guess-like-item v-for="item in guessLikeData" :key="item.itemId" :item="item"></guess-like-item>
         </div>
       </el-col>
     </el-row>
@@ -52,7 +53,8 @@
 import { mapState } from "vuex";
 import AMap from "@/components/list/map";
 import CategorySelect from "@/components/list/category";
-import ProductItem from "@/components/list/product";
+import ProductList from "@/components/list/product";
+import GuessLikeItem from "@/components/public/items/guessLikeItem";
 export default {
   data() {
     return {
@@ -67,7 +69,7 @@ export default {
         { name: "人气最高", value: "popularity" },
         { name: "评价最该", value: "evaluate" }
       ],
-      list: []
+      guessLikeData: []
     };
   },
   mounted() {
@@ -82,7 +84,8 @@ export default {
   components: {
     AMap,
     CategorySelect,
-    ProductItem
+    ProductList,
+    GuessLikeItem
   },
   created() {
     this.$axios
@@ -96,6 +99,29 @@ export default {
       .catch(() => {
         this.category = {};
       });
+    this.$axios.$get("/home/guesslike").then(res => {
+      if (res.code !== 0) {
+        this.guessLikeData = [];
+        return;
+      }
+      this.guessLikeData = res.data;
+    });
+  },
+  /**
+   * 服务端渲染，参数和axios都通过ctx获取，因为这时没有data，ctx就相当于平时的this
+   * 这里return的数据和data中是合并的，所以data中不必再写。
+   * */
+  async asyncData(ctx) {
+    let keyword = ctx.query.keyword;
+    let { data, code } = await ctx.$axios.$get("/list/listData", {
+      params: { keyword }
+    });
+    if (code !== 0) {
+      return {
+        list: []
+      };
+    }
+    return { list: data };
   },
   computed: {
     ...mapState({
@@ -137,6 +163,15 @@ export default {
   .noData {
     padding-top: 15px;
     text-align: center;
+  }
+  .guessLike {
+    background: #fff;
+    margin-top: 20px;
+    h2 {
+      padding: 10px;
+      color: #000;
+      font-weight: bolder;
+    }
   }
 }
 </style>
