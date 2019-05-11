@@ -26,7 +26,7 @@
       >
         <el-option
           v-for="item in queryAsyncData"
-          :key="item.iid"
+          :key="item.id"
           :label="item.name"
           :value="item.name"
         ></el-option>
@@ -41,13 +41,13 @@
     <div class="recentCities">
       <span class="selectType">最近访问：</span>
       <ul class="recentList">
-        <li v-for="item in recentCity" :key="item" @click="changeCity(item)">{{item}}</li>
+        <li v-for="(item,index) in recentCity" :key="index" @click="changeCity(item)">{{item}}</li>
       </ul>
     </div>
     <div class="baseFirstLetter">
       <span class="selectType">按拼音首字母选择：</span>
       <ul class="letterList">
-        <li v-for="item in letters" :key="item">
+        <li v-for="(item,index) in letters" :key="index">
           <a :href="'#city-'+item">{{item}}</a>
         </li>
       </ul>
@@ -56,7 +56,7 @@
       <dl v-for="group in citiesByLetter" :key="group.title">
         <dt :id="'city-'+group.title">{{group.title}}</dt>
         <dd>
-          <span v-for="item in group.list" :key="item" @click="changeCity(item)">{{item}}</span>
+          <span v-for="(item,index) in group.list" :key="index" @click="changeCity(item)">{{item}}</span>
         </dd>
       </dl>
     </div>

@@ -34,7 +34,16 @@
               <i class="el-icon-d-caret" v-if="item.value === 'price'"></i>
             </span>
           </div>
-          <product-list :listData="list"></product-list>
+          <product-list :listData="list" :total="total" :pageSize="10"></product-list>
+        </div>
+        <div class="pagination">
+          <el-pagination
+            background
+            layout="prev, pager, next"
+            :total="total"
+            :page-size="10"
+            @current-change="this.getListData"
+          ></el-pagination>
         </div>
       </el-col>
       <el-col :span="5">
@@ -58,9 +67,10 @@ import GuessLikeItem from "@/components/public/items/guessLikeItem";
 export default {
   data() {
     return {
-      keyword: this.$route.params.keyword,
       point: [116.397428, 39.90923],
       category: { types: [], areas: [] },
+      pageSize: 10,
+      pageNo: 0,
       curSort: "smart",
       posiType: "static",
       sorts: [
@@ -112,16 +122,19 @@ export default {
    * 这里return的数据和data中是合并的，所以data中不必再写。
    * */
   async asyncData(ctx) {
-    let keyword = ctx.query.keyword;
-    let { data, code } = await ctx.$axios.$get("/list/listData", {
-      params: { keyword }
+    // 从路由中获取参数，实际肯定是需要keyword字段的，这里虽传递但是没有作用。
+    let keyword = ctx.route.params.keyword;
+    let { data, code, total } = await ctx.$axios.$get("/list/listData", {
+      params: { keyword, pageSize: 10, pageNo: 0 }
     });
     if (code !== 0) {
       return {
-        list: []
+        list: [],
+        total: 0,
+        keyword
       };
     }
-    return { list: data };
+    return { list: data, total, keyword };
   },
   computed: {
     ...mapState({
@@ -131,6 +144,21 @@ export default {
   methods: {
     clickSortHandler(value) {
       this.curSort = value;
+    },
+    // 通过分页获取数据
+    getListData(page) {
+      this.pageNo = page - 1;
+      this.$axios
+        .$get("/list/listData", {
+          params: {
+            keyword: this.keyword,
+            pageSize: this.pageSize,
+            pageNo: this.pageNo
+          }
+        })
+        .then(res => {
+          this.list = res.data;
+        });
     }
   }
 };
@@ -144,7 +172,7 @@ export default {
     border: solid 1px #e5e5e5;
     border-radius: 4px;
     margin-bottom: 10px;
-    padding: 15px;
+    padding: 15px 15px 0;
     color: #666;
     .sort {
       border-bottom: solid 1px #e5e5e5;
@@ -159,6 +187,9 @@ export default {
         color: #31bcad;
       }
     }
+  }
+  .pagination {
+    text-align: center;
   }
   .noData {
     padding-top: 15px;

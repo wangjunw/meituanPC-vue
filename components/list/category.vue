@@ -21,8 +21,8 @@
           <dl style="padding: 0 10px; box-sizing:border-box;">
             <dt style="font-size: 16px;color: #ccc;margin-bottom: 10px;">{{item.type}}</dt>
             <dd
-              v-for="i in item.module"
-              :key="i"
+              v-for="(i,index) in item.module"
+              :key="index"
               style="display: inline-block; width: 25%;margin-bottom: 5px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap"
             >
               <nuxt-link to="/detail" style="color: #666;">{{i}}</nuxt-link>

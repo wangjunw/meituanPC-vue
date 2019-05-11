@@ -22,7 +22,16 @@ router.get('/category', async ctx => {
 });
 
 router.get('/listData', async ctx => {
-  const result = await List.find();
+  const { keyword, pageSize, pageNo } = ctx.query;
+  // 没有条件，无法根据keyword查数据
+  const count = await List.count();
+  /**
+   * limit：查询几个，不用parseInt会报错：'limit' field must be numeric
+   * skip：跳过几个，配合limit做分页
+   */
+  const result = await List.find()
+    .limit(parseInt(pageSize))
+    .skip(pageNo * pageSize);
   if (!result) {
     ctx.body = {
       code: -1,
@@ -32,7 +41,8 @@ router.get('/listData', async ctx => {
   }
   ctx.body = {
     code: 0,
-    data: result
+    data: result,
+    total: count
   };
 });
 export default router;
