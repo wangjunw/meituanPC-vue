@@ -1,5 +1,5 @@
 <template>
-  <div :id="id" :style="{width,height}">地图</div>
+  <div :id="id" :style="{width,height}"></div>
 </template>
 <script>
 export default {
@@ -18,16 +18,22 @@ export default {
   },
   mounted() {
     window.onLoad = () => {
+      // center地图的中心位置坐标
       let map = new AMap.Map(this.id, {
         resizeEnable: true,
         center: this.point
       });
       window.AMap.plugin("AMap.ToolBar", () => {
-        let toolbar = new AMap.ToolBar();
-        map.addControl(toolbar);
+        // 缩放条
+        // let toolbar = new AMap.ToolBar();
+        // map.addControl(toolbar);
+
+        // 标记，如果有多个就多新建几个marker对象
         let marker = new window.AMap.Marker({
-          icon: "//vdata.amap.com/icons/b18/1/2.png",
-          position: this.point
+          icon: "https://webapi.amap.com/theme/v1.3/markers/n/mark_b.png",
+          position: this.point,
+          title: "天安门"
+          // content: "1" 可以自定义标记物
         });
         marker.setMap(map);
       });

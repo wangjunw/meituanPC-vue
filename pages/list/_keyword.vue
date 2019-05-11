@@ -24,16 +24,26 @@
         </div>
         <div class="listArea">
           <div class="sort">
-            <span v-for="item in sorts" :key="item.value">
+            <span
+              v-for="item in sorts"
+              :key="item.value"
+              :class="{activedSort:curSort === item.value}"
+              @click="clickSortHandler(item.value)"
+            >
               {{item.name}}
               <i class="el-icon-d-caret" v-if="item.value === 'price'"></i>
             </span>
           </div>
-          <product-list></product-list>
+          <div v-if="list.length !== 0">
+            <product-item v-for="item in list" :key="item.id" :data="item"></product-item>
+          </div>
+          <div v-else class="noData">抱歉，暂无数据</div>
         </div>
       </el-col>
       <el-col :span="5">
-        <a-map id="listMap" width="230px" height="220px" :point="point"></a-map>
+        <div :style="{position:posiType, top: 0}" ref="mapRef">
+          <a-map id="listMap" width="230px" height="220px" :point="point"></a-map>
+        </div>
       </el-col>
     </el-row>
   </div>
@@ -42,7 +52,7 @@
 import { mapState } from "vuex";
 import AMap from "@/components/list/map";
 import CategorySelect from "@/components/list/category";
-import ProductList from "@/components/list/product";
+import ProductItem from "@/components/list/product";
 export default {
   data() {
     return {
@@ -50,18 +60,29 @@ export default {
       point: [116.397428, 39.90923],
       category: { types: [], areas: [] },
       curSort: "smart",
+      posiType: "static",
       sorts: [
         { name: "智能排序", value: "smart" },
         { name: "价格排序", value: "price" },
         { name: "人气最高", value: "popularity" },
         { name: "评价最该", value: "evaluate" }
-      ]
+      ],
+      list: []
     };
+  },
+  mounted() {
+    window.addEventListener("scroll", () => {
+      if (document.documentElement.scrollTop > 240) {
+        this.posiType = "fixed";
+      } else {
+        this.posiType = "static";
+      }
+    });
   },
   components: {
     AMap,
     CategorySelect,
-    ProductList
+    ProductItem
   },
   created() {
     this.$axios
@@ -81,7 +102,11 @@ export default {
       city: state => state.position.city
     })
   },
-  asyncData({}) {}
+  methods: {
+    clickSortHandler(value) {
+      this.curSort = value;
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>
@@ -94,14 +119,24 @@ export default {
     border-radius: 4px;
     margin-bottom: 10px;
     padding: 15px;
+    color: #666;
     .sort {
+      border-bottom: solid 1px #e5e5e5;
+      padding-bottom: 15px;
       span {
         display: inline-block;
         min-width: 96px;
         font-size: 14px;
         cursor: pointer;
       }
+      .activedSort {
+        color: #31bcad;
+      }
     }
+  }
+  .noData {
+    padding-top: 15px;
+    text-align: center;
   }
 }
 </style>
