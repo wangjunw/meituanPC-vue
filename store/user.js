@@ -1,5 +1,5 @@
 export const state = () => ({
-  userInfo: null
+  userInfo: {}
 });
 export const mutations = {
   INIT_USER(state, user) {

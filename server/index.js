@@ -15,7 +15,7 @@ import home from './interface/home';
 import movie from './interface/movie';
 import city from './interface/city';
 import list from './interface/list';
-
+import detail from './interface/detail';
 const app = new Koa();
 
 // Import and Set Nuxt.js options
@@ -73,6 +73,7 @@ async function start() {
   app.use(movie.routes()).use(movie.allowedMethods());
   app.use(city.routes()).use(city.allowedMethods());
   app.use(list.routes()).use(list.allowedMethods());
+  app.use(detail.routes()).use(detail.allowedMethods());
   app.use(ctx => {
     ctx.status = 200;
     ctx.respond = false; // Bypass Koa's built-in response handling

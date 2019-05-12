@@ -24,7 +24,7 @@ router.get('/category', async ctx => {
 router.get('/listData', async ctx => {
   const { keyword, pageSize, pageNo } = ctx.query;
   // 没有条件，无法根据keyword查数据
-  const count = await List.count();
+  const count = await List.countDocuments();
   /**
    * limit：查询几个，不用parseInt会报错：'limit' field must be numeric
    * skip：跳过几个，配合limit做分页
