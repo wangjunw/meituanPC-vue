@@ -57,7 +57,10 @@
             </ul>
             <el-checkbox v-model="onlyViewImgComment">只看有图片的评论</el-checkbox>
             <div class="commentList">
-              <comment-item v-for="(item, index) in comments" :key="item.did" :item="item"></comment-item>
+              <comment-item v-for="(item, index) in comments" :key="index" :item="item"></comment-item>
+            </div>
+            <div class="pages">
+              <el-pagination background layout="prev, pager, next" :total="1000"></el-pagination>
             </div>
           </div>
         </div>
@@ -191,6 +194,10 @@ export default {
       padding: 10px;
       border: solid 1px #e5e5e5;
     }
+  }
+  .pages {
+    text-align: center;
+    padding: 40px 0 30px 0;
   }
 }
 .border {
