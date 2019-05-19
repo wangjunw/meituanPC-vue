@@ -3,6 +3,26 @@ const router = new Router({ prefix: '/detail' });
 import Nearby from '../dbs/models/nearby';
 import Comment from '../dbs/models/comment';
 import RecommendDish from '../dbs/models/recommenddish';
+import Store from '../dbs/models/store';
+
+/**
+ * 获取店铺详情
+ */
+router.get('/store', async ctx => {
+  let storeId = ctx.query.storeId;
+  const data = await Store.find({ storeId });
+  if (!data) {
+    ctx.body = {
+      code: -1,
+      data: []
+    };
+    return;
+  }
+  ctx.body = {
+    code: 0,
+    data
+  };
+});
 /**
  * 获取附近商家数据
  */

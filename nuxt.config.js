@@ -1,5 +1,6 @@
 const pkg = require('./package');
-
+global.HTMLElement =
+  typeof window === 'undefined' ? Object : window.HTMLElement;
 module.exports = {
   mode: 'universal',
 
@@ -33,7 +34,7 @@ module.exports = {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['@/plugins/element-ui'],
+  plugins: [{ src: '@/plugins/element-ui', ssr: false }],
 
   /*
    ** Nuxt.js modules

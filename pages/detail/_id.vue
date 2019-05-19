@@ -5,7 +5,41 @@
       <el-breadcrumb-item :to="{path: '/list/美食'}">美食列表</el-breadcrumb-item>
       <el-breadcrumb-item>详情</el-breadcrumb-item>
     </el-breadcrumb>
-    <div>详情</div>
+    <div class="border storeInfo">
+      <el-row>
+        <el-col :span="15">
+          <div class="titleWarp">
+            <h2 class="storeName">{{storeInfo.name}}</h2>
+            <div class="securityFile" v-if="storeInfo.securityFile">
+              <i class="el-icon-s-claim"></i>
+              食品安全档案
+            </div>
+          </div>
+          <div class="scoreWarp">
+            <el-rate
+              :value="storeInfo.score"
+              disabled
+              show-score
+              text-color="#666"
+              score-template="{value}分"
+            ></el-rate>
+            <span class="priceOfOne">人均{{storeInfo.priceOfOne}}</span>
+          </div>
+          <div class="center">
+            <p class="address">地址：{{storeInfo.address}}</p>
+            <p class="phone">电话：{{storeInfo.phone}}</p>
+            <p class="openTime">营业时间：{{storeInfo.openTime}}</p>
+          </div>
+          <ul class="otherService">
+            <li v-for="(item,index) in storeInfo.service" :key="index">
+              <img :src="item.img" alt width="24" height="24">
+              <p>{{item.text}}</p>
+            </li>
+          </ul>
+        </el-col>
+        <el-col :span="9"></el-col>
+      </el-row>
+    </div>
     <el-row :gutter="10">
       <el-col :span="19">
         <div class="groupBuy">
@@ -92,10 +126,23 @@ export default {
       noLoginImg: require("@/static/images/detail_noLogin_img.png"),
       nearbyData: [],
       onlyViewImgComment: false,
-      sortWay: "byQuality"
+      sortWay: "byQuality",
+      filterBy: "all",
+      storeInfo: {}
     };
   },
   created() {
+    this.$axios
+      .$get("/detail/store", {
+        params: {
+          storeId: this.$route.params.id
+        }
+      })
+      .then(res => {
+        if (res.code === 0) {
+          this.storeInfo = res.data[0];
+        }
+      });
     this.$axios.$get("/home/guesslike").then(res => {
       if (res.code !== 0) {
         this.guessLikeData = [];
@@ -123,7 +170,12 @@ export default {
   async asyncData({ route, store, $axios }) {
     let {
       data: { tags, comments }
-    } = await $axios.$get("/detail/comment");
+    } = await $axios.$get("/detail/comment", {
+      params: {
+        sortWay: "byQuality",
+        filterBy: "all"
+      }
+    });
     let {
       data: { items, list }
     } = await $axios.$get("/detail/recommend");
@@ -143,11 +195,81 @@ export default {
     sortHandler(by) {
       this.sortWay = by;
     }
+    // getCommentList() {
+    //   $axios
+    //     .$get("/detail/comment", {
+    //       params: {
+    //         sortWay: this.sortWay,
+    //         filterBy: this.filterBy
+    //       }
+    //     })
+    //     .then(res => {
+    //       if (res.code === 0) {
+    //         this.comments = res.data.comments;
+    //       }
+    //     });
+    // }
   }
 };
 </script>
 
 <style lang="scss" scoped>
+$color666: #666;
+.border {
+  background: #fff;
+  border: solid 1px #e5e5e5;
+  border-radius: 3px;
+  margin-bottom: 40px;
+}
+.storeInfo {
+  border-radius: 10px;
+  padding: 20px 20px 33px;
+  font-size: 14px;
+  .titleWarp {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+    .storeName {
+      font-size: 26px;
+    }
+    .securityFile {
+      color: #00c9b3;
+      display: flex;
+      align-items: center;
+      .el-icon-s-claim {
+        font-size: 20px;
+        margin-right: 5px;
+      }
+    }
+  }
+  .scoreWarp {
+    display: flex;
+    padding-bottom: 10px;
+    border-bottom: solid 1px #e5e5e5;
+    .priceOfOne {
+      color: $color666;
+      margin-top: -1px;
+    }
+  }
+  .center {
+    color: $color666;
+    padding: 13px 0;
+    border-bottom: solid 1px #e5e5e5;
+    p {
+      line-height: 30px;
+    }
+  }
+  .otherService {
+    overflow: hidden;
+    padding-top: 20px;
+    li {
+      float: left;
+      margin-right: 10px;
+      text-align: center;
+    }
+  }
+}
 .groupBuy {
   .groupBuyContent {
     .noLogin {
@@ -193,6 +315,7 @@ export default {
       margin: 0 10px 10px 0;
       padding: 10px;
       border: solid 1px #e5e5e5;
+      cursor: pointer;
     }
   }
   .pages {
@@ -200,12 +323,7 @@ export default {
     padding: 40px 0 30px 0;
   }
 }
-.border {
-  background: #fff;
-  border: solid 1px #e5e5e5;
-  border-radius: 3px;
-  margin-bottom: 40px;
-}
+
 .title {
   margin-bottom: 10px;
   color: #000;
