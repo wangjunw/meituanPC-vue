@@ -10,10 +10,10 @@
         <el-col :span="15">
           <div class="titleWarp">
             <h2 class="storeName">{{storeInfo.name}}</h2>
-            <div class="securityFile" v-if="storeInfo.securityFile">
+            <a href="javascript:;" class="securityFile" v-if="storeInfo.securityFile">
               <i class="el-icon-s-claim"></i>
               食品安全档案
-            </div>
+            </a>
           </div>
           <div class="scoreWarp">
             <el-rate
@@ -26,7 +26,10 @@
             <span class="priceOfOne">人均{{storeInfo.priceOfOne}}</span>
           </div>
           <div class="center">
-            <p class="address">地址：{{storeInfo.address}}</p>
+            <p class="address">
+              地址：{{storeInfo.address}}
+              <i class="el-icon-location" @click="showMapHandler(true)"></i>
+            </p>
             <p class="phone">电话：{{storeInfo.phone}}</p>
             <p class="openTime">营业时间：{{storeInfo.openTime}}</p>
           </div>
@@ -36,8 +39,11 @@
               <p>{{item.text}}</p>
             </li>
           </ul>
+          <pop-map v-show="showMap" :showMapHandler="showMapHandler"></pop-map>
         </el-col>
-        <el-col :span="9"></el-col>
+        <el-col :span="9">
+          <album-swiper></album-swiper>
+        </el-col>
       </el-row>
     </div>
     <el-row :gutter="10">
@@ -119,6 +125,8 @@
 import GuessLikeItem from "@/components/public/items/guessLikeItem";
 import NearbyItem from "@/components/public/items/nearbyItem";
 import CommentItem from "@/components/public/items/commentItem";
+import AlbumSwiper from "@/components/detail/album";
+import PopMap from "@/components/detail/popmap";
 export default {
   data() {
     return {
@@ -128,7 +136,8 @@ export default {
       onlyViewImgComment: false,
       sortWay: "byQuality",
       filterBy: "all",
-      storeInfo: {}
+      storeInfo: {},
+      showMap: false
     };
   },
   created() {
@@ -165,7 +174,9 @@ export default {
   components: {
     GuessLikeItem,
     NearbyItem,
-    CommentItem
+    CommentItem,
+    AlbumSwiper,
+    PopMap
   },
   async asyncData({ route, store, $axios }) {
     let {
@@ -194,21 +205,10 @@ export default {
     },
     sortHandler(by) {
       this.sortWay = by;
+    },
+    showMapHandler(action) {
+      this.showMap = action;
     }
-    // getCommentList() {
-    //   $axios
-    //     .$get("/detail/comment", {
-    //       params: {
-    //         sortWay: this.sortWay,
-    //         filterBy: this.filterBy
-    //       }
-    //     })
-    //     .then(res => {
-    //       if (res.code === 0) {
-    //         this.comments = res.data.comments;
-    //       }
-    //     });
-    // }
   }
 };
 </script>
@@ -258,6 +258,9 @@ $color666: #666;
     border-bottom: solid 1px #e5e5e5;
     p {
       line-height: 30px;
+      .el-icon-location {
+        cursor: pointer;
+      }
     }
   }
   .otherService {
@@ -267,6 +270,9 @@ $color666: #666;
       float: left;
       margin-right: 10px;
       text-align: center;
+      p {
+        margin-top: 5px;
+      }
     }
   }
 }
