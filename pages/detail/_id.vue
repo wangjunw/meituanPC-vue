@@ -39,7 +39,7 @@
               <p>{{item.text}}</p>
             </li>
           </ul>
-          <pop-map v-show="showMap" :showMapHandler="showMapHandler"></pop-map>
+          <pop-map v-show="showMap" :showMapHandler="showMapHandler" :storeInfo="storeInfo"></pop-map>
         </el-col>
         <el-col :span="9">
           <album-swiper></album-swiper>

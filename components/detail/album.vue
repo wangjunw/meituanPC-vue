@@ -2,7 +2,7 @@
   <div class="album-container">相册</div>
 </template>
 <style lang="scss" scoped>
-.album-container {
+.pop {
   background: rgba($color: #000, $alpha: 0.5);
   position: fixed;
   top: 0;
