@@ -6,7 +6,7 @@
       <el-breadcrumb-item>详情</el-breadcrumb-item>
     </el-breadcrumb>
     <div class="border storeInfo">
-      <el-row>
+      <el-row :gutter="20">
         <el-col :span="15">
           <div class="titleWarp">
             <h2 class="storeName">{{storeInfo.name}}</h2>
@@ -39,10 +39,15 @@
               <p>{{item.text}}</p>
             </li>
           </ul>
-          <pop-map v-show="showMap" :showMapHandler="showMapHandler" :storeInfo="storeInfo"></pop-map>
+          <pop-map
+            v-show="showMap"
+            :showMapHandler="showMapHandler"
+            :storeInfo="storeInfo"
+            :point="[116.397428, 39.90923]"
+          ></pop-map>
         </el-col>
         <el-col :span="9">
-          <album-swiper></album-swiper>
+          <album-swiper :images="storeInfo.images"></album-swiper>
         </el-col>
       </el-row>
     </div>

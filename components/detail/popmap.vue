@@ -33,14 +33,17 @@ export default {
     },
     storeInfo: {
       type: Object
+    },
+    point: {
+      type: Array
     }
   },
   mounted() {
-    window.onLoad = () => {
+    window.onDetailLoad = () => {
       this.buildMap();
     };
     let url =
-      "https://webapi.amap.com/maps?v=1.4.14&key=0ce3111bd1ffa1f70ecc83577971f6af&callback=onLoad";
+      "https://webapi.amap.com/maps?v=1.4.14&key=0ce3111bd1ffa1f70ecc83577971f6af&callback=onDetailLoad";
     let jsapi = document.createElement("script");
     jsapi.charset = "utf-8";
     jsapi.src = url;
@@ -52,7 +55,7 @@ export default {
       // center地图的中心位置坐标，没有数据直接写死的，如果有数据直接替换即可
       this.map = new AMap.Map(mapContainer, {
         resizeEnable: true,
-        center: [116.397428, 39.90923],
+        center: this.point,
         zoom: 13
       });
       window.AMap.plugin("AMap.ToolBar", () => {
@@ -72,7 +75,7 @@ export default {
         content: info.join("")
       });
       // 直接显示，所以直接调用
-      infoWindow.open(this.map, [116.397428, 39.90923]);
+      infoWindow.open(this.map, this.point);
     },
     // 切换图层
     changeLayer(value) {

@@ -17,7 +17,7 @@ export default {
     return {};
   },
   mounted() {
-    window.onLoad = () => {
+    window.onListLoad = () => {
       // center地图的中心位置坐标
       let map = new AMap.Map(this.id, {
         resizeEnable: true,
@@ -39,7 +39,7 @@ export default {
       });
     };
     let url =
-      "https://webapi.amap.com/maps?v=1.4.14&key=0ce3111bd1ffa1f70ecc83577971f6af&callback=onLoad";
+      "https://webapi.amap.com/maps?v=1.4.14&key=0ce3111bd1ffa1f70ecc83577971f6af&callback=onListLoad";
     let jsapi = document.createElement("script");
     jsapi.charset = "utf-8";
     jsapi.src = url;
