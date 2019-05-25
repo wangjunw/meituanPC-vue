@@ -55,9 +55,18 @@
       <el-col :span="19">
         <div class="groupBuy">
           <h2 class="title">商家团购及优惠</h2>
-          <div class="groupBuyContent border">
-            <div v-if="userInfo.username"></div>
-            <div v-else class="noLogin">
+          <div v-if="this.$store.state.user.userInfo.username">
+            <div class="border package">
+              <h4>{{storeInfo.package ? storeInfo.package.length : ''}}款食堂套餐</h4>
+              <package-item v-for="item in storeInfo.package" :key="item.id" :packageInfo="item"></package-item>
+            </div>
+            <div class="border voucher">
+              <h4>{{storeInfo.voucher ? storeInfo.voucher.length : ''}}张代金券</h4>
+              <voucher-item v-for="item in storeInfo.voucher" :key="item.id" :voucherInfo="item"></voucher-item>
+            </div>
+          </div>
+          <div v-else class="border">
+            <div class="noLogin">
               <img :src="noLoginImg" alt width="160" height="120">
               <h2 class="tips">请登录后查看详细团购优惠</h2>
               <el-button type="success" round @click="toLogin">立即登录</el-button>
@@ -132,6 +141,8 @@ import NearbyItem from "@/components/public/items/nearbyItem";
 import CommentItem from "@/components/public/items/commentItem";
 import AlbumSwiper from "@/components/detail/album";
 import PopMap from "@/components/detail/popmap";
+import PackageItem from "@/components/public/items/detail_packageItem";
+import VoucherItem from "@/components/public/items/detail_voucherItem";
 export default {
   data() {
     return {
@@ -141,7 +152,7 @@ export default {
       onlyViewImgComment: false,
       sortWay: "byQuality",
       filterBy: "all",
-      storeInfo: {},
+      storeInfo: { package: [] },
       showMap: false
     };
   },
@@ -181,7 +192,9 @@ export default {
     NearbyItem,
     CommentItem,
     AlbumSwiper,
-    PopMap
+    PopMap,
+    PackageItem,
+    VoucherItem
   },
   async asyncData({ route, store, $axios }) {
     let {
@@ -282,14 +295,25 @@ $color666: #666;
   }
 }
 .groupBuy {
-  .groupBuyContent {
-    .noLogin {
-      text-align: center;
-      padding: 30px 0;
-      .tips {
-        margin: 15px 0;
-        font-size: 16px;
-      }
+  h4 {
+    line-height: 26px;
+    font-size: 16px;
+    font-weight: bolder;
+    color: #000;
+  }
+  .package {
+    padding: 16px 20px 20px;
+    margin-bottom: 10px;
+  }
+  .voucher {
+    padding: 16px 20px 20px;
+  }
+  .noLogin {
+    text-align: center;
+    padding: 30px 0;
+    .tips {
+      margin: 15px 0;
+      font-size: 16px;
     }
   }
 }

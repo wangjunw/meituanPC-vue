@@ -85,21 +85,6 @@ export default {
     recommendedHomestay,
     guessLink,
     mtNavigation
-  },
-  created() {
-    this.$axios.$get("/users/getUser").then(res => {
-      if (res.code === 0) {
-        this.initUser(res.userInfo);
-      } else {
-        this.$message.error("获取用户信息失败");
-        // this.$router.push("/account/login");
-      }
-    });
-  },
-  methods: {
-    ...mapMutations({
-      initUser: "user/INIT_USER"
-    })
   }
 };
 </script>

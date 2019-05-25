@@ -11,19 +11,28 @@
   </div>
 </template>
 <script>
-import { mapState, mapMutations } from "vuex";
+import { mapMutations } from "vuex";
 export default {
   data() {
-    return {};
+    return {
+      userInfo: {}
+    };
   },
-  computed: {
-    ...mapState({
-      userInfo: state => state.user.userInfo
-    })
+  created() {
+    this.$axios.$get("/users/getUser").then(res => {
+      if (res.code === 0) {
+        this.userInfo = res.userInfo;
+        this.initUser(res.userInfo);
+      } else {
+        this.$message.error("获取用户信息失败");
+        // this.$router.push("/account/login");
+      }
+    });
   },
   methods: {
     ...mapMutations({
-      resetUserInfo: "user/INIT_USER"
+      resetUserInfo: "user/INIT_USER",
+      initUser: "user/INIT_USER"
     }),
     exitHandler() {
       this.$axios.get("/users/exit").then(res => {
