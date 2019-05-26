@@ -53,7 +53,31 @@ export default {
     }
   },
   methods: {
-    buyPackage() {}
+    buyPackage() {
+      this.$axios
+        .$post("/cart/create", {
+          id:
+            new Date().getTime() +
+            Math.random()
+              .toString()
+              .slice(3, 9),
+          detail: {
+            price: this.packageInfo.price,
+            pic: this.packageInfo.pic,
+            name: this.packageInfo.name
+          }
+        })
+        .then(res => {
+          if (res.code !== 0) {
+            this.$message({
+              message: "当前套餐太火爆了！请重新尝试",
+              type: "warning"
+            });
+            return;
+          }
+          window.location.href = `/cart?id=${res.cartNo}`;
+        });
+    }
   }
 };
 </script>

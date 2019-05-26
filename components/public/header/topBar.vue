@@ -1,5 +1,5 @@
 <template>
-  <div class="top">
+  <div class="top-bar">
     <div class="top-left">
       <city/>
       <user class="user"/>
@@ -21,8 +21,8 @@ export default {
   }
 };
 </script>
-<style lang="scss" scoped>
-.top {
+<style lang="scss">
+.top-bar {
   display: flex;
   justify-content: space-between;
   a {

@@ -16,6 +16,8 @@ import movie from './interface/movie';
 import city from './interface/city';
 import list from './interface/list';
 import detail from './interface/detail';
+import cart from './interface/cart';
+import order from './interface/order';
 const app = new Koa();
 
 // Import and Set Nuxt.js options
@@ -67,13 +69,15 @@ async function start() {
   }
 
   // 引人路由
-  app.use(users.routes()).use(users.allowedMethods());
-  app.use(geo.routes()).use(geo.allowedMethods());
-  app.use(home.routes()).use(home.allowedMethods());
-  app.use(movie.routes()).use(movie.allowedMethods());
-  app.use(city.routes()).use(city.allowedMethods());
-  app.use(list.routes()).use(list.allowedMethods());
-  app.use(detail.routes()).use(detail.allowedMethods());
+  app.use(users.routes()).use(users.allowedMethods()); // 用户
+  app.use(geo.routes()).use(geo.allowedMethods()); //位置
+  app.use(home.routes()).use(home.allowedMethods()); //首页
+  app.use(movie.routes()).use(movie.allowedMethods()); //猫眼电影
+  app.use(city.routes()).use(city.allowedMethods()); // 切换城市
+  app.use(list.routes()).use(list.allowedMethods()); //商品列表
+  app.use(detail.routes()).use(detail.allowedMethods()); //详情
+  app.use(cart.routes()).use(cart.allowedMethods()); //购物车
+  app.use(order.routes()).use(order.allowedMethods()); //订单
   app.use(ctx => {
     ctx.status = 200;
     ctx.respond = false; // Bypass Koa's built-in response handling
