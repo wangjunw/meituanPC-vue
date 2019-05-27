@@ -26,7 +26,7 @@
           <div v-else class="userCenter">
             <ul>
               <li v-for="item in userCenter" :key="item.text">
-                <a href>
+                <a href="/center/order">
                   <i class="iconfont" :class="item.icon"></i>
                   <p class="text">{{item.text}}</p>
                 </a>
@@ -50,23 +50,14 @@
         <a href class="f3"></a>
       </el-col>
       <el-col :span="6">
-        <div class="qrcode">
-          <img
-            src="http://s1.meituan.net/bs/fe-web-meituan/60ac9a0/img/download-qr.png"
-            alt
-            width="95px"
-          >
-          <p class="title">美团APP手机版</p>
-          <p>
-            <span class="oneYuan">1元起</span>吃喝玩乐
-          </p>
-        </div>
+        <qr-code style="margin-left:10px"></qr-code>
       </el-col>
     </el-row>
   </div>
 </template>
 <script>
 import { mapState } from "vuex";
+import QrCode from "./qrcode";
 export default {
   data() {
     return {
@@ -111,6 +102,9 @@ export default {
         }
       ]
     };
+  },
+  components: {
+    QrCode
   },
   computed: {
     ...mapState({

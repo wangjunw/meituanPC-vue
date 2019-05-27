@@ -9,7 +9,7 @@
         <nuxt-link to="/my">我的美团</nuxt-link>
         <dl v-show="hoverMyMeituan" class="myMeituan">
           <dd>
-            <nuxt-link to="/myOrder">我的订单</nuxt-link>
+            <nuxt-link to="/center/order">我的订单</nuxt-link>
           </dd>
           <dd>
             <nuxt-link to="/myCollect">我的收藏</nuxt-link>
