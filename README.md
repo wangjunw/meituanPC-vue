@@ -1,6 +1,12 @@
 # meituanPC-vue
 
-> 一个 Nuxt.js 项目，服务端用的 node，框架用的 koa
+## 技术栈
+- Nuxt.js框架做ssr
+- 集成了axios、router、ElementUI
+- 服务端用的 node，框架用的koa以及koa系列库
+- 数据库mongodb，mongoose库操作mongodb
+- 登录功能使用passport
+- 邮件服务nodemailer
 
 ## Build Setup
 
@@ -19,6 +25,4 @@ $ npm start
 $ npm run generate
 ```
 
-For detailed explanation on how things work, checkout [Nuxt.js docs](https://nuxtjs.org).
-
-> 需要注意在启动项目之前，请先启动 mongodb 和 redis
+> 需要注意在启动项目之前，请先启动 mongodb 和 redis，最后会把mongodb数据放进来，但是数据基本都是自己手懂copy的，仅仅作用学习使用！
