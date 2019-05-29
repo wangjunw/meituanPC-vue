@@ -17,21 +17,18 @@
 
 <script>
 import OrderItem from "@/components/public/items/orderItem";
+import { mapState } from "vuex";
 export default {
   data() {
     return {
-      orderStatus: [
-        { text: "全部订单", status: "0" },
-        { text: "待付款", status: "1" },
-        { text: "待使用", status: "2" },
-        { text: "待评价", status: "3" },
-        { text: "退款/售后", status: "4" }
-      ],
       currentStatus: this.$route.query.status
     };
   },
   components: {
     OrderItem
+  },
+  computed: {
+    ...mapState(["orderStatus"])
   },
   async asyncData(ctx) {
     let { code, data } = await ctx.$axios

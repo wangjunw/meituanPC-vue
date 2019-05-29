@@ -6,10 +6,10 @@
         @mouseleave="showMyMeituan"
         :class="{hoverThis:hoverMyMeituan}"
       >
-        <nuxt-link to="/center/myMeitaun">我的美团</nuxt-link>
+        <nuxt-link to="/center/myMeituan">我的美团</nuxt-link>
         <dl v-show="hoverMyMeituan" class="myMeituan">
           <dd>
-            <nuxt-link to="/center/order">我的订单</nuxt-link>
+            <nuxt-link to="/center/order?status=0">我的订单</nuxt-link>
           </dd>
           <dd>
             <nuxt-link to="/center/collections">我的收藏</nuxt-link>

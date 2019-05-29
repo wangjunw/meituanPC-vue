@@ -5,7 +5,7 @@
         <div class="asideMenu">
           <dl>
             <dt>
-              <nuxt-link to="/myMeituan">我的美团</nuxt-link>
+              <nuxt-link to="/center/myMeituan">我的美团</nuxt-link>
             </dt>
           </dl>
           <dl>
@@ -54,17 +54,11 @@
   </div>
 </template>
 <script>
+import { mapState } from "vuex";
 import QrCode from "@/components/home/qrcode";
 export default {
   data() {
     return {
-      orderStatus: [
-        { text: "全部订单", status: "0" },
-        { text: "待付款", status: "1" },
-        { text: "待使用", status: "2" },
-        { text: "待评价", status: "3" },
-        { text: "退款/售后", status: "4" }
-      ],
       collections: [
         {
           text: "收藏的商家",
@@ -84,6 +78,9 @@ export default {
   },
   components: {
     QrCode
+  },
+  computed: {
+    ...mapState(["orderStatus"])
   }
 };
 </script>

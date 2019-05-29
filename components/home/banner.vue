@@ -26,13 +26,13 @@
           <div v-else class="userCenter">
             <ul>
               <li v-for="item in userCenter" :key="item.text">
-                <a href="/center/order">
+                <a href="/center/order?status=0">
                   <i class="iconfont" :class="item.icon"></i>
                   <p class="text">{{item.text}}</p>
                 </a>
               </li>
             </ul>
-            <nuxt-link to="/settings" class="setting">
+            <nuxt-link to="/center/settings" class="setting">
               <i class="iconfont iconshezhi"></i>
             </nuxt-link>
           </div>

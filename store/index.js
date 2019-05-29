@@ -1,7 +1,14 @@
 export const state = () => ({
   position: {
     city: ''
-  }
+  },
+  orderStatus: [
+    { text: "全部订单", status: "0" },
+    { text: "待付款", status: "1" },
+    { text: "待使用", status: "2" },
+    { text: "待评价", status: "3" },
+    { text: "退款/售后", status: "4" }
+  ],
 });
 
 export const mutations = {
