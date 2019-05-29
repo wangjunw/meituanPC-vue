@@ -1,7 +1,7 @@
 <template>
   <div class="m-user">
-    <template v-if="userInfo">
-      <nuxt-link to="/my" class="user-link">{{userInfo.username}}</nuxt-link>
+    <template v-if="userInfo.username">
+      <nuxt-link to="/center/myMeitaun" class="user-link">{{userInfo.username}}</nuxt-link>
       <a href="javascript:;" @click="exitHandler" class="user-link">[退出]</a>
     </template>
     <template v-else>

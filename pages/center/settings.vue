@@ -1,3 +1,3 @@
 <template>
-  <div>设置页面</div>
+  <div>账户设置</div>
 </template>

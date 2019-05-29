@@ -1,6 +1,6 @@
 <template>
   <div class="center-container">
-    <el-row :gutter="20">
+    <el-row :gutter="8">
       <el-col :span="5">
         <div class="asideMenu">
           <dl>
