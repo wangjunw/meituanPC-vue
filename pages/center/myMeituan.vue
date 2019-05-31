@@ -4,7 +4,7 @@
       <div class="info">
         <img src alt>
         <div class="content">
-          <h3>{{userInfo.username}}</h3>
+          <h3 v-if="userInfo && userInfo.username">{{userInfo.username}}</h3>
           <p>
             我的余额：￥{{'0'}}
             <a href="javascript:;">充值卡充值</a>

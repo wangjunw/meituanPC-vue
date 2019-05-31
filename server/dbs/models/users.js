@@ -13,6 +13,15 @@ const UserSchema = new Schema({
   email: {
     type: String,
     require: true
+  },
+  nickname: {
+    type: String
+  },
+  birthday: {
+    type: String
+  },
+  avatar: {
+    type: String
   }
 });
 export default mongoose.model('User', UserSchema);

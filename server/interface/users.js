@@ -65,7 +65,10 @@ router.post('/signup', async ctx => {
   let newUser = User.create({
     username,
     password: md5.update(password).digest('hex'),
-    email
+    email,
+    nickname: '',
+    birthday: '',
+    avatar: ''
   });
   // 通过调用登录接口，检验是否创建用户成功
   if (newUser) {
@@ -202,13 +205,24 @@ router.get('/exit', async (ctx, next) => {
  */
 router.get('/getUser', async ctx => {
   if (ctx.isAuthenticated()) {
-    const { username, email } = ctx.session.passport.user;
+    const {
+      username,
+      email,
+      password,
+      nickname,
+      birthday,
+      avatar
+    } = ctx.session.passport.user;
     ctx.body = {
       code: 0,
       msg: 'ok',
       userInfo: {
         username,
-        email
+        email,
+        password,
+        nickname,
+        birthday,
+        avatar
       }
     };
   } else {
@@ -277,4 +291,7 @@ router.post('/updatePassword', async (ctx, next) => {
     };
   }
 });
+
+// 修改用户信息
+router.post('/updateUserInfo', async ctx => {});
 export default router;
