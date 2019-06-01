@@ -27,10 +27,10 @@ router.post('/createOrder', async ctx => {
       total,
       price,
       createTime: time,
-      user: ctx.session.passport.user,
+      user: ctx.session.passport.user.username,
       name,
       pic,
-      status: 0
+      status: 1
     });
     let result = await order.save();
     if (!result) {
@@ -59,7 +59,7 @@ router.get('/getOrders', async ctx => {
     return;
   }
   let result = await Order.find({
-    user: ctx.session.passport.user
+    user: ctx.session.passport.user.username
   });
   if (!result) {
     ctx.body = {

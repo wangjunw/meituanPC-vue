@@ -23,7 +23,7 @@
               height="140"
             >
           </div>
-          <p class="zan">
+          <p class="zan" :class="{actived: this.actived}" @click="zanHandler">
             <i class="el-icon-star-on"></i>赞
           </p>
         </div>
@@ -36,7 +36,8 @@ import moment from "moment";
 export default {
   data() {
     return {
-      avatarDefault: require("@/static/images/avatar.jpg")
+      avatarDefault: require("@/static/images/avatar.jpg"),
+      actived: false
     };
   },
   props: {
@@ -49,6 +50,17 @@ export default {
       // 这里的传入的时间戳一定要转成number格式
       let date = new Date(Number(v));
       return moment(date).format("YYYY年MM月DD日");
+    },
+    zanHandler() {
+      if (!this.$store.state.user.userInfo.username) {
+        this.$notify.info({
+          title: "提示",
+          message: "请先登录！",
+          duration: 1500
+        });
+        return;
+      }
+      this.actived = !this.actived;
     }
   }
 };
@@ -99,6 +111,9 @@ export default {
       .el-icon-star-on {
         margin-right: 3px;
       }
+    }
+    .actived {
+      color: #f90;
     }
   }
 }

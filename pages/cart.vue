@@ -110,7 +110,7 @@ export default {
             });
             return;
           }
-          this.$router.replace("/order");
+          this.$router.replace("/center/order?status=0");
         });
     }
   }

@@ -114,7 +114,8 @@
               <comment-item v-for="(item, index) in comments" :key="index" :item="item"></comment-item>
             </div>
             <div class="pages">
-              <el-pagination background layout="prev, pager, next" :total="1000"></el-pagination>
+              <!-- 此处分页无效，数据限制 -->
+              <el-pagination background layout="prev, pager, next" :total="comments.length"></el-pagination>
             </div>
           </div>
         </div>

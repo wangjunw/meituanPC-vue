@@ -36,12 +36,16 @@ export default {
   computed: {
     statusText() {
       switch (this.item.status) {
-        case 0:
-          return "未完成";
         case 1:
-          return "已完成";
+          return "待付款";
+        case 2:
+          return "待使用";
+        case 3:
+          return "待评价";
+        case 4:
+          return "全部完成";
         default:
-          return "已完成";
+          return "未知状态";
       }
     }
   }

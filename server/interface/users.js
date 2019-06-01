@@ -270,7 +270,7 @@ router.post('/checkUser', async ctx => {
 });
 
 /**
- * 修改密码接口
+ * 根据验证码修改密码接口
  */
 router.post('/updatePassword', async (ctx, next) => {
   let { username, newPassword } = ctx.request.body;
@@ -291,7 +291,93 @@ router.post('/updatePassword', async (ctx, next) => {
     };
   }
 });
+// 修改用户头像
+router.post('/updateAvatar', async ctx => {
+  let { username, avatar } = ctx.request.body;
+  let result = await User.updateOne({ username }, { avatar });
+  if (!result) {
+    ctx.body = {
+      code: -1,
+      msg: '头像上传失败'
+    };
+    return;
+  }
+  let userInfo = await User.findOne({ username });
+  ctx.body = {
+    code: 0,
+    msg: '头像修改成功',
+    userInfo
+  };
+});
+//根据旧密码修改密码
+router.post('/updatePasswordByPassword', async ctx => {
+  let { username, oldPass, newPass } = ctx.request.body;
+  const md5 = crypto.createHash('md5');
+  let oldPassMd5 = md5.update(oldPass).digest('hex');
+  console.log(oldPassMd5);
+  let user = await User.findOne({ username });
+  console.log(user);
+  if (user.password !== oldPassMd5) {
+    ctx.body = {
+      code: -1,
+      msg: '旧密码有误'
+    };
+    return;
+  }
+  const newPassMd5 = crypto
+    .createHash('md5')
+    .update(newPass)
+    .digest('hex');
+  let result = await User.updateOne({ username }, { password: newPassMd5 });
+  if (!result) {
+    ctx.body = {
+      code: -1,
+      msg: '密码修改失败'
+    };
+    return;
+  }
+  let userInfo = await User.findOne({ username });
+  ctx.body = {
+    code: 0,
+    msg: '修改成功',
+    userInfo
+  };
+});
+// 修改用户昵称
+router.post('/updateNickname', async ctx => {
+  let { username, nickname } = ctx.request.body;
+  let result = await User.updateOne({ username }, { nickname });
+  if (!result) {
+    ctx.body = {
+      code: -1,
+      msg: '修改昵称失败'
+    };
+    return;
+  }
+  let userInfo = await User.findOne({ username });
+  ctx.body = {
+    code: 0,
+    msg: '昵称修改成功',
+    userInfo
+  };
+});
 
-// 修改用户信息
-router.post('/updateUserInfo', async ctx => {});
+// 修改用户生日
+router.post('/updateBirthday', async ctx => {
+  let { username, birthday } = ctx.request.body;
+  let result = await User.updateOne({ username }, { birthday });
+  if (!result) {
+    ctx.body = {
+      code: -1,
+      msg: '修改生日失败'
+    };
+    return;
+  }
+  let userInfo = await User.findOne({ username });
+  ctx.body = {
+    code: 0,
+    msg: '生日修改成功',
+    userInfo
+  };
+});
 export default router;

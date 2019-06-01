@@ -15,8 +15,8 @@
       </el-col>
       <el-col :span="6">
         <div class="loginAndRegister">
-          <img :src="avatar" class="avatar">
-          <p class="hi">{{!userInfo.username?'Hi，你好':userInfo.username}}</p>
+          <img :src="userInfo.avatar ||avatar" class="avatar">
+          <p class="hi">{{!userInfo.username?'Hi，你好':(userInfo.nickname ||userInfo.username)}}</p>
           <div v-if="!userInfo.username">
             <div class="registerBtn">
               <el-button round @click="toRegister">注册</el-button>

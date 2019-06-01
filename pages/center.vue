@@ -57,6 +57,11 @@
 import { mapState } from "vuex";
 import QrCode from "@/components/home/qrcode";
 export default {
+  beforeCreate() {
+    if (!this.$store.state.user.userInfo.username) {
+      this.$router.replace("/account/login");
+    }
+  },
   data() {
     return {
       collections: [

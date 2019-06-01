@@ -2,15 +2,15 @@
   <div class="myMeituan-container">
     <div class="head">
       <div class="info">
-        <img src alt>
+        <img :src="userInfo.avatar" alt class="avatar">
         <div class="content">
-          <h3 v-if="userInfo && userInfo.username">{{userInfo.username}}</h3>
+          <h3 v-if="userInfo && userInfo.username">{{userInfo.nickname || userInfo.username}}</h3>
           <p>
             我的余额：￥{{'0'}}
             <a href="javascript:;">充值卡充值</a>
           </p>
         </div>
-        <nuxt-link to="/center/settings">个人信息设置</nuxt-link>
+        <nuxt-link to="/center/settings">个人信息设置 ></nuxt-link>
       </div>
       <ul class="orderList">
         <li v-for="(item,index) in orderStatus" :key="index">
@@ -51,6 +51,12 @@ export default {
       border-top-right-radius: 5px;
       * {
         color: #fff;
+      }
+      .avatar {
+        width: 110px;
+        height: 110px;
+        border-radius: 50%;
+        margin-right: 20px;
       }
       .content {
         margin-right: auto;

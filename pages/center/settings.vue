@@ -10,7 +10,14 @@
         <div class="content">
           <img :src="userInfo.avatar" class="avatar" alt>
         </div>
-        <el-button round>修改</el-button>
+        <input
+          type="file"
+          v-show="false"
+          @change="selectPicture"
+          ref="fileInput"
+          accept="image/jpeg, image/jpg, image/png"
+        >
+        <el-button round @click="clickChangeHandler">修改</el-button>
       </li>
       <li class="infoItem">
         <p class="labelName">昵称</p>
@@ -25,7 +32,7 @@
       <li class="infoItem">
         <p class="labelName">手机号</p>
         <div class="content">{{telNum}}</div>
-        <el-button round>换绑</el-button>
+        <el-button round @click="$message('暂不支持换绑手机号');">换绑</el-button>
       </li>
       <li class="infoItem">
         <p class="labelName">登录密码</p>
@@ -33,7 +40,12 @@
         <el-button round @click="showModalHandler('密码')">修改</el-button>
       </li>
     </ul>
-    <setting-modal v-show="showModal" :curType="type" @closeModal="closeModalHandler"></setting-modal>
+    <setting-modal
+      v-show="showModal"
+      :curType="type"
+      @closeModal="closeModalHandler"
+      :avatar="avatar"
+    ></setting-modal>
   </div>
 </template>
 <script>
@@ -43,7 +55,9 @@ export default {
   data() {
     return {
       type: "",
-      showModal: false
+      showModal: false,
+      accept: ["image/jpeg", "image/jpg", "image/png"],
+      avatar: ""
     };
   },
   components: {
@@ -71,6 +85,28 @@ export default {
     },
     closeModalHandler() {
       this.showModal = false;
+    },
+    clickChangeHandler() {
+      this.$refs.fileInput.click();
+    },
+    selectPicture(e) {
+      console.log(e);
+      let files = e.target.files;
+      if (files.length === 0) {
+        return;
+      }
+      let file = files[0];
+      if (this.accept.indexOf(file.type) === -1) {
+        this.$message.error("不支持该格式！");
+        return;
+      }
+      let reader = new FileReader();
+      reader.readAsDataURL(file);
+      let that = this;
+      reader.onload = function() {
+        that.avatar = this.result;
+        that.showModalHandler("头像");
+      };
     }
   }
 };
