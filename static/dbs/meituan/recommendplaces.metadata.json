@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":2,"key":{"_id":1},"name":"_id_","ns":"meituan.recommendplaces"},{"v":2,"unique":true,"key":{"id":1},"name":"id_1","ns":"meituan.recommendplaces","background":true},{"v":2,"unique":true,"key":{"place.id":1},"name":"place.id_1","ns":"meituan.recommendplaces","background":true}],"uuid":"88c6d07705ee4f3fbb79713942cd18f4"}

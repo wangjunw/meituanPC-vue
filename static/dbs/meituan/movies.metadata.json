@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":2,"key":{"_id":1},"name":"_id_","ns":"meituan.movies"},{"v":2,"unique":true,"key":{"id":1},"name":"id_1","ns":"meituan.movies","background":true}],"uuid":"dc9505b1e79d48ddbeff83599b59eecb"}

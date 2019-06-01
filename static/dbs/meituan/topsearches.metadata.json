@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":2,"key":{"_id":1},"name":"_id_","ns":"meituan.topsearches"},{"v":2,"unique":true,"key":{"id":1},"name":"id_1","ns":"meituan.topsearches","background":true}],"uuid":"4c58833b0c8944e78747ee6fb4a4cdf5"}
