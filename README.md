@@ -10,6 +10,10 @@
 - 邮件服务 nodemailer
 
 ## Build Setup
+需要先全局安装`windows-build-tools`
+```
+npm install -g --production windows-build-tools
+```
 
 ```bash
 # install dependencies
@@ -26,4 +30,4 @@ $ npm start
 $ npm run generate
 ```
 
-> 需要注意在启动项目之前，请先启动 mongodb 和 redis，最后会把 mongodb 数据放进来，但是数据基本都是自己手动 copy 的用来测试的数据，仅仅作用学习使用！
+> 需要注意在启动项目之前，请先启动 mongodb 和 redis，最后会把 mongodb 数据放进来，但是数据基本都是自己手动 copy 的用来测试的数据，仅仅作为学习使用！
