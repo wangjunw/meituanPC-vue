@@ -27,19 +27,21 @@
     "koa-router": "^7.4.0",
     "moment": "^2.24.0",
     "mongoose": "^5.4.20",
-    "node-sass": "^4.11.0",
     "nodemailer": "^6.0.0",
     "nuxt": "^2.4.0",
-    "passport-local": "^1.0.0",
-    "sass-loader": "^7.1.0"
+    "passport-local": "^1.0.0"
   },
   "devDependencies": {
     "@vue/test-utils": "^1.0.0-beta.27",
-    "babel-core": "7.0.0-bridge.0",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^23.6.0",
+    "babel-node": "0.0.1-security",
     "babel-preset-env": "^1.7.0",
     "jest": "^23.6.0",
+    "node-sass": "^4.14.0",
     "nodemon": "^1.18.9",
+    "sass-loader": "^7.3.1",
     "vue-jest": "^3.0.2"
   }
 }
